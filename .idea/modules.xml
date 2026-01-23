@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Gui/Gui.iml" filepath="$PROJECT_DIR$/Gui/Gui.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Java.iml" filepath="$PROJECT_DIR$/.idea/Java.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Oop/Oop.iml" filepath="$PROJECT_DIR$/Oop/Oop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/OOP/Ptit.iml" filepath="$PROJECT_DIR$/OOP/Ptit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Oop1/Oop1.iml" filepath="$PROJECT_DIR$/Oop1/Oop1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Oop/Ptit.iml" filepath="$PROJECT_DIR$/Oop/Ptit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ptit1/Ptit1.iml" filepath="$PROJECT_DIR$/Ptit1/Ptit1.iml" />
       <module fileurl="file://$PROJECT_DIR$/RA/RA.iml" filepath="$PROJECT_DIR$/RA/RA.iml" />
       <module fileurl="file://$PROJECT_DIR$/TECH/TECH.iml" filepath="$PROJECT_DIR$/TECH/TECH.iml" />
     </modules>
