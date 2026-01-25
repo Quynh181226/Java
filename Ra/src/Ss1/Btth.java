@@ -1,5 +1,7 @@
 package Ss1;
 
+import java.util.Scanner;
+
 //[Bài tập] Thực hành thao tác cơ bản về Quản lý thư viện
 //
 //
@@ -55,4 +57,45 @@ package Ss1;
 //Giá tiền hiển thị 2 chữ số thập phân (ví dụ: 150.00)
 //Trạng thái kho (Dùng toán tử điều kiện ? : để in ra chữ "Còn hàng" thay vì true/false)
 public class Btth {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int bookID;
+        String title;
+        double price;
+        int quantity;
+        boolean isAvailable;
+
+        System.out.print("Nhập mã sách: ");
+        bookID = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Nhập tên sách: ");
+        title = sc.nextLine();
+
+        System.out.print("Nhập giá nhập: ");
+        price = sc.nextDouble();
+
+        System.out.print("Nhập số lượng: ");
+        quantity = sc.nextInt();
+
+        System.out.print("Sách còn hàng? (true/false): ");
+        isAvailable = sc.nextBoolean();
+
+        double totalValue = price * quantity;
+        boolean isLargeStock = quantity > 100;
+        boolean canBorrow = isAvailable && quantity > 0;
+
+        System.out.println("\n===== BÁO CÁO SÁCH =====");
+        System.out.printf("Mã sách: %d%n", bookID);
+        System.out.printf("Tên sách: %s%n", title.toUpperCase());
+        System.out.printf("Giá nhập: %.2f%n", price);
+        System.out.printf("Số lượng: %d%n", quantity);
+        System.out.printf("Tổng giá trị kho: %.2f%n", totalValue);
+        System.out.printf("Kho lớn (>100 sách): %b%n", isLargeStock);
+        System.out.printf("Trạng thái: %s%n", isAvailable ? "Còn hàng" : "Hết hàng");
+        System.out.printf("Có thể mượn: %b%n", canBorrow);
+
+        sc.close();
+    }
 }
