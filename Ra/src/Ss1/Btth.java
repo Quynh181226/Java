@@ -95,7 +95,5 @@ public class Btth {
         System.out.printf("Kho lớn (>100 sách): %b%n", isLargeStock);
         System.out.printf("Trạng thái: %s%n", isAvailable ? "Còn hàng" : "Hết hàng");
         System.out.printf("Có thể mượn: %b%n", canBorrow);
-
-        sc.close();
     }
 }
