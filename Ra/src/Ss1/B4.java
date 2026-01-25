@@ -15,16 +15,16 @@ public class B4 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Nhập giá sách (USD - Kiểu double): ");
+        System.out.print("Nhập giá sách (USD): ");
         double price=sc.nextDouble();
 
-        System.out.print("Nhập tỷ giá (USD - Kiểu double): ");
+        System.out.print("Nhập tỷ giá (VND): ");
         float exchangeRate=sc.nextFloat();
 
         double totalPrice=price*exchangeRate;
         long pay=(long)totalPrice;
 
         System.out.print("Giá chính xác (Số thực): "+totalPrice);
-        System.out.print("Giá làm trong để thanh toán (long): "+pay);
+        System.out.print("\nGiá làm trong để thanh toán (long): "+pay);
     }
 }

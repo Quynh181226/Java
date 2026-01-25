@@ -15,7 +15,7 @@ public class B2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Nhập số ngày chậm chễ: ");
+        System.out.print("Nhập số ngày chậm trễ: ");
         int n = sc.nextInt();
 
         System.out.print("Nhập số lượng sách mượn: ");
@@ -23,9 +23,7 @@ public class B2 {
 
         double Total = n *  m * 5000;
 
-        if(n > 7 && m >=3){
-            Total*=1.2;
-        }
+        if(n > 7 && m >=3) Total*=1.2;
 
         boolean lockCard=Total>50000;
 
