@@ -26,7 +26,7 @@ import java.util.Scanner;
 public class Btth {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int chon;
+        int choice;
 
         do {
             System.out.println("\n=== QUAN LY THU VIEN ===");
@@ -35,18 +35,16 @@ public class Btth {
             System.out.println("3. Thong ke sach moi");
             System.out.println("0. Thoat");
             System.out.print("Chon: ");
-            chon = sc.nextInt();
+            choice = sc.nextInt();
 
-            switch (chon) {
+            switch (choice) {
                 case 1: phatMuon(sc); break;
                 case 2: vip(sc); break;
                 case 3: sachMoi(sc); break;
                 case 0: System.out.println("Tam biet!"); break;
                 default: System.out.println("Sai, chon lai.");
             }
-        } while (chon != 0);
-
-        sc.close();
+        } while (choice != 0);
     }
 
     static void phatMuon(Scanner sc) {
