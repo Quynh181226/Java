@@ -25,12 +25,16 @@ public class Mini1 {
             // consume newline
             sc.nextLine();
 
-            if (choice == 0) {
-                System.out.println("Tam biet! Hen gap lai.");
-                break;
-            }
+//            if (choice == 0) {
+//                System.out.println("Tam biet! Hen gap lai.");
+//                break;
+//            }
 
             switch (choice) {
+                case 0:
+                    System.out.println("Tam biet! Hen gap lai.");
+                    return;
+//                  break;
                 case 1:
                     twoSum(sc);
                     break;
@@ -49,7 +53,6 @@ public class Mini1 {
                 default:
                     System.out.println("Lua chon khong hop le! Vui long chon lai.");
             }
-            sc.nextLine();
         }
     }
 
