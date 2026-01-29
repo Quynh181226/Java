@@ -52,6 +52,7 @@ public class Exam1 {
         System.out.println("6. Thoat");
         System.out.println("===================================");
     }
+
     //1.Hiển thị: In ra danh sách MSSV hiện có
     private static void displayList(String[] mssvList, int cnt) {
         if (cnt == 0) {
@@ -67,7 +68,6 @@ public class Exam1 {
     //2. Thêm mới (Có Regex): * Yêu cầu nhập MSSV mới
     //a. Kiểm tra định dạng: MSSV phải bắt đầu bằng chữ B, theo sau là đúng 7 chữ số (Ví dụ: B2101234)
     //b. Nếu sai yêu cầu nhập lại
-
     private static int addMssv(Scanner sc, String[] mssvList, int cnt) {
         if (cnt == 100) {
             System.out.println("Mang da day!!");
