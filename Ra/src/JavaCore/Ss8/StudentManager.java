@@ -3,16 +3,15 @@ package JavaCore.Ss8;
 public class StudentManager {
     private Student1[] danhSach;
     private int soLuong;
-    private static final int MAX = 100;
 
     public StudentManager() {
-        danhSach = new Student1[MAX];
+        danhSach = new Student1[100];
         soLuong = 0;
     }
 
     // add student
     public boolean themSinhVien(Student1 sv) {
-        if (soLuong >= MAX) {
+        if (soLuong >= 100) {
             System.out.println("Danh sach day, khong the them!");
             return false;
         }

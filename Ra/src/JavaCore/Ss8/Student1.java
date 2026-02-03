@@ -110,7 +110,6 @@ public class Student1 {
         }
     }
 
-    @Override
     public String toString() {
         return String.format("%-10s %-20s %-5d %-10s %-7.2f %-10s", maSV, hoTen, tuoi, gioiTinh, diemTB, xepLoai);
     }
