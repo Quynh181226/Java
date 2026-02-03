@@ -48,7 +48,7 @@ public class Main {
         double diemLy = nhapDiem("Nhap diem Ly (0-10): ");
         double diemHoa = nhapDiem("Nhap diem Hoa (0-10): ");
 
-        Student sv = new Student(maSV, hoTen, tuoi, gioiTinh, diemToan, diemLy, diemHoa);
+        Student1 sv = new Student1(maSV, hoTen, tuoi, gioiTinh, diemToan, diemLy, diemHoa);
         if (manager.themSinhVien(sv)) {
             System.out.println("Them thanh cong!");
         } else {
@@ -60,7 +60,7 @@ public class Main {
         int loai = nhapSo("Tim theo: 1. Ma SV, 2. Ten: ");
         if (loai == 1) {
             String maSV = nhapChuoi("Nhap ma SV: ");
-            Student sv = manager.timSinhVien(maSV);
+            Student1 sv = manager.timSinhVien(maSV);
             if (sv != null) {
                 System.out.println(sv);
             } else {
@@ -104,7 +104,7 @@ public class Main {
 
     private static void tinhDiemVaXepLoai() {
         String maSV = nhapChuoi("Nhap ma SV: ");
-        Student sv = manager.timSinhVien(maSV);
+        Student1 sv = manager.timSinhVien(maSV);
         if (sv != null) {
             System.out.println("Diem TB: " + String.format("%.2f", sv.getDiemTB()));
             System.out.println("Xep loai: " + sv.getXepLoai());

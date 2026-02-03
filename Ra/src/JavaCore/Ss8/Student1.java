@@ -1,6 +1,6 @@
 package JavaCore.Ss8;
 
-public class Student {
+public class Student1 {
     private String maSV;
     private String hoTen;
     private int tuoi;
@@ -11,7 +11,7 @@ public class Student {
     private double diemTB;
     private String xepLoai;
 
-    public Student(String maSV, String hoTen, int tuoi, String gioiTinh, double diemToan, double diemLy, double diemHoa) {
+    public Student1(String maSV, String hoTen, int tuoi, String gioiTinh, double diemToan, double diemLy, double diemHoa) {
         this.maSV = maSV;
         this.hoTen = hoTen;
         this.tuoi = tuoi;

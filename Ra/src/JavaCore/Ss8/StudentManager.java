@@ -1,19 +1,17 @@
 package JavaCore.Ss8;
 
-import java.util.Arrays;
-
 public class StudentManager {
-    private Student[] danhSach;
+    private Student1[] danhSach;
     private int soLuong;
     private static final int MAX = 100;
 
     public StudentManager() {
-        danhSach = new Student[MAX];
+        danhSach = new Student1[MAX];
         soLuong = 0;
     }
 
     // add student
-    public boolean themSinhVien(Student sv) {
+    public boolean themSinhVien(Student1 sv) {
         if (soLuong >= MAX) {
             System.out.println("Danh sach day, khong the them!");
             return false;
@@ -40,7 +38,7 @@ public class StudentManager {
     }
 
     // search stu by ma or name
-    public Student timSinhVien(String maSV) {
+    public Student1 timSinhVien(String maSV) {
         for (int i = 0; i < soLuong; i++) {
             if (danhSach[i].getMaSV().equals(maSV)) {
                 return danhSach[i];
@@ -64,7 +62,7 @@ public class StudentManager {
 
     // upd stu
     public boolean capNhat(String maSV, String hoTen, int tuoi, String gioiTinh, double diemToan, double diemLy, double diemHoa) {
-        Student sv = timSinhVien(maSV);
+        Student1 sv = timSinhVien(maSV);
         if (sv == null) {
             System.out.println("Khong tim thay sinh vien!");
             return false;
@@ -100,7 +98,7 @@ public class StudentManager {
         for (int i = 0; i < soLuong - 1; i++) {
             for (int j = 0; j < soLuong - i - 1; j++) {
                 if (danhSach[j].getDiemTB() < danhSach[j + 1].getDiemTB()) {
-                    Student temp = danhSach[j];
+                    Student1 temp = danhSach[j];
                     danhSach[j] = danhSach[j + 1];
                     danhSach[j + 1] = temp;
                 }
@@ -117,7 +115,7 @@ public class StudentManager {
                     minIdx = j;
                 }
             }
-            Student temp = danhSach[minIdx];
+            Student1 temp = danhSach[minIdx];
             danhSach[minIdx] = danhSach[i];
             danhSach[i] = temp;
         }
@@ -131,11 +129,11 @@ public class StudentManager {
         }
         int gioi = 0, kha = 0, tb = 0, yeu = 0;
         double tongTB = 0;
-        Student maxSV = danhSach[0];
-        Student minSV = danhSach[0];
+        Student1 maxSV = danhSach[0];
+        Student1 minSV = danhSach[0];
 
         for (int i = 0; i < soLuong; i++) {
-            Student sv = danhSach[i];
+            Student1 sv = danhSach[i];
             tongTB += sv.getDiemTB();
             switch (sv.getXepLoai()) {
                 case "Gioi": gioi++; break;
