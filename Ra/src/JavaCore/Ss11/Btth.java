@@ -1,5 +1,8 @@
-//package JavaCore.Ss11;
-//
+package JavaCore.Ss11;
+
+import java.util.ArrayList;
+import java.util.List;
+
 ////[Bài tập thực hành OOP]
 ////
 ////Hệ thống Nhân vật Game "Arena of Heroes"
@@ -75,21 +78,13 @@
 ////    }
 ////};
 ////Logic: Xử lý đúng phần trừ giáp của Warrior và trừ mana của Mage.
-//public class Btth {
-//}
-package JavaCore.Ss11;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Btth {
 
-    // Interface định nghĩa kỹ năng đặc biệt
     interface ISkill {
         void useUltimate(GameCharacter target);
     }
 
-    // Abstract class khung nhân vật
     abstract static class GameCharacter {
         protected String name;
         protected int hp;
@@ -106,10 +101,8 @@ public class Btth {
         public String getName() { return name; }
         public int getHp() { return hp; }
 
-        // Tấn công cơ bản (trừu tượng)
         public abstract void attack(GameCharacter target);
 
-        // Nhận sát thương
         public void takeDamage(int amount) {
             if (hp <= 0) return;
             hp -= amount;
@@ -119,13 +112,11 @@ public class Btth {
             }
         }
 
-        // In thông tin
         public void displayInfo() {
             System.out.println("Tên: " + name + " | HP: " + hp);
         }
     }
 
-    // Chiến binh
     static class Warrior extends GameCharacter implements ISkill {
         private int armor;
 
@@ -168,7 +159,6 @@ public class Btth {
         }
     }
 
-    // Pháp sư
     static class Mage extends GameCharacter implements ISkill {
         private int mana;
 
@@ -197,7 +187,7 @@ public class Btth {
         public void useUltimate(GameCharacter target) {
             if (mana >= 50) {
                 mana -= 50;
-                int damage = 100; // sát thương khủng
+                int damage = 100;
                 System.out.println("[" + name + "] dùng chiêu cuối 'Hỏa cầu' lên " + target.getName() + "!");
                 System.out.println("(Tốn 50 mana)");
                 target.takeDamage(damage);
@@ -218,13 +208,11 @@ public class Btth {
 
         List<GameCharacter> arena = new ArrayList<>();
 
-        // Thêm nhân vật
         Warrior yasuo = new Warrior("Yasuo", 500, 50, 20);
         Mage veigar = new Mage("Veigar", 300, 40, 200);
         arena.add(yasuo);
         arena.add(veigar);
 
-        // Anonymous Class cho Goblin (Quái vật)
         GameCharacter goblin = new GameCharacter("Goblin", 100, 0) {
             @Override
             public void attack(GameCharacter target) {
@@ -243,7 +231,6 @@ public class Btth {
 
         System.out.println("Đã khởi tạo " + GameCharacter.count + " nhân vật tham gia đấu trường.\n");
 
-        // Giả lập lượt đấu đơn giản
         System.out.println("1. " + yasuo.getName() + " tấn công " + goblin.getName() + "!");
         yasuo.attack(goblin);
 
@@ -253,7 +240,6 @@ public class Btth {
         System.out.println("3. " + goblin.getName() + " tấn công!");
         goblin.attack(veigar);
 
-        // In thông số sau lượt đấu
         System.out.println("=== THÔNG SỐ SAU LƯỢT ĐẤU ===");
         for (GameCharacter c : arena) {
             c.displayInfo();
