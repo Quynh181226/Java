@@ -17,7 +17,7 @@ public class Ex5 {
         Queue<EmergencyCase> qData = new LinkedList<>();
         EmergencyCaseQueue hospitalQueue = new EmergencyCaseQueue(qData);
 
-        Patient p1 = new Patient("BN01", "A", 24);
+        Patient1 p1 = new Patient1("BN01", "A", 24);
         Stack<TreatmentStep> s1 = new Stack<>();
         EmergencyCase case1 = new EmergencyCase(p1, s1);
 
@@ -27,7 +27,7 @@ public class Ex5 {
 
         hospitalQueue.addCase(case1);
 
-        Patient p2 = new Patient("BN02", "B", 20);
+        Patient1 p2 = new Patient1("BN02", "B", 20);
         Stack<TreatmentStep> s2 = new Stack<>();
         EmergencyCase case2 = new EmergencyCase(p2, s2);
 
@@ -74,10 +74,10 @@ class TreatmentStep{
     }
 }
 class EmergencyCase{
-    Patient patient;
+    Patient1 patient;
     Stack<TreatmentStep> steps;
 
-    public EmergencyCase(Patient patient, Stack<TreatmentStep> steps) {
+    public EmergencyCase(Patient1 patient, Stack<TreatmentStep> steps) {
         this.patient = patient;
         this.steps = steps;
     }

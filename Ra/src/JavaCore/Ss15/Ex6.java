@@ -9,9 +9,9 @@ public class Ex6 {
         hospitalQueue.addPatient(new Patient("P02", "V", 20, "Nu"));
         System.out.println("Goi kham: " + hospitalQueue.callPatient().getName());
 
-        MedicalRecordHistory history = new MedicalRecordHistory("REC100");
-        history.saveAction(new EditAction("Thay doi nhip tim", "Dr. HACKER", "08:00"));
-        history.saveAction(new EditAction("Cap nhat huyet ap", "Dr. KAKA", "08:15"));
+        MedicalRecordHistory1 history = new MedicalRecordHistory1("REC100");
+        history.saveAction(new EditAction1("Thay doi nhip tim", "Dr. HACKER", "08:00"));
+        history.saveAction(new EditAction1("Cap nhat huyet ap", "Dr. KAKA", "08:15"));
         history.showHistory();
 
         TicketSystem ts = new TicketSystem();
@@ -45,19 +45,19 @@ class PatientWaitingQueue {
     Patient callPatient() { return waitingQueue.poll(); }
 }
 
-class EditAction {
+class EditAction1 {
     private String description, editedBy, editTime;
-    public EditAction(String d, String e, String t) {
+    public EditAction1(String d, String e, String t) {
         description = d; editedBy = e; editTime = t;
     }
     public String toString() { return "[" + editTime + "] " + description + " by " + editedBy; }
 }
 
-class MedicalRecordHistory {
-    private Stack<EditAction> editStack = new Stack<>();
+class MedicalRecordHistory1 {
+    private Stack<EditAction1> editStack = new Stack<>();
     private String recordId;
-    public MedicalRecordHistory(String id) { this.recordId = id; }
-    void saveAction(EditAction a) { editStack.push(a); }
+    public MedicalRecordHistory1(String id) { this.recordId = id; }
+    void saveAction(EditAction1 a) { editStack.push(a); }
     void showHistory() {
         for (int i = editStack.size() - 1; i >= 0; i--) System.out.println(editStack.get(i));
     }

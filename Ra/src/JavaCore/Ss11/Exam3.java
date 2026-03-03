@@ -71,7 +71,7 @@ class FruitJuice extends Drink implements IMixable {
     }
 }
 
-public class Ex3 {
+public class Exam3 {
     public static void main(String[] args) {
         Drink[] drinks = new Drink[3];
 

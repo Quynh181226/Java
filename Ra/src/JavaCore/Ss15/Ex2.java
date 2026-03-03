@@ -12,11 +12,11 @@ import java.util.Queue;
 //Kết quả mong muốn: Cài đặt Queue quản lý danh sách bệnh nhân. Đảm bảo thứ tự khám đúng FIFO. Hiển thị danh sách bệnh nhân còn chờ.
 public class Ex2 {
     static  void use(){
-        Queue<Patient> queueData = new LinkedList<>();
+        Queue<Patient1> queueData = new LinkedList<>();
         PatientQueue hospitalQueue = new PatientQueue(queueData);
-        hospitalQueue.addPatient(new Patient("BN01", "A", 24));
-        hospitalQueue.addPatient(new Patient("BN02", "B", 20));
-        hospitalQueue.addPatient(new Patient("BN03", "C", 22));
+        hospitalQueue.addPatient(new Patient1("BN01", "A", 24));
+        hospitalQueue.addPatient(new Patient1("BN02", "B", 20));
+        hospitalQueue.addPatient(new Patient1("BN03", "C", 22));
 
         hospitalQueue.displayQueue();
         System.out.println("\nBệnh nhân chuẩn bị đến lượt: " + hospitalQueue.peekNextPatient());
@@ -29,12 +29,12 @@ public class Ex2 {
     }
 }
 
-class Patient{
+class Patient1{
     private String id;
     private String name;
     private int age;
 
-    public Patient(String id, String name, int age) {
+    public Patient1(String id, String name, int age) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -71,20 +71,20 @@ class Patient{
 }
 
 class PatientQueue{
-    Queue<Patient> queue;
+    Queue<Patient1> queue;
 
-    public PatientQueue(Queue<Patient> queue) {
+    public PatientQueue(Queue<Patient1> queue) {
         this.queue = queue;
     }
-    void addPatient(Patient p){
+    void addPatient(Patient1 p){
         queue.offer(p);
     }
 
-    Patient callNextPatient(){
+    Patient1 callNextPatient(){
         return queue.poll();
     }
 
-    Patient peekNextPatient(){
+    Patient1 peekNextPatient(){
         return queue.peek();
     }
 
@@ -97,7 +97,7 @@ class PatientQueue{
             System.out.println("Lịch sử trống.");
             return;
         }
-        for (Patient p : queue) {
+        for (Patient1 p : queue) {
             System.out.println(p);
         }
     }
