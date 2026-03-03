@@ -16,7 +16,7 @@ public class FoodProduct extends Product {
     @Override
     public void displayInfo() {
         super.displayInfo();
-        System.out.printf(" | Giảm: %d%% | Thành tiền: %.0f%n |",
+        System.out.printf(" | Giảm: %d%% | Thành tiền: %.0f%n ",
                 discountPercent, calculateFinalPrice());
     }
 }

@@ -26,6 +26,6 @@ abstract class Product {
     public abstract double calculateFinalPrice();
 
     public void displayInfo() {
-        System.out.printf("|Mã: %s | Tên: %s | Giá gốc: %.0f", id, name, price);
+        System.out.printf("Mã: %-8s | Tên: %-20s | Giá gốc: %12.0f", id, name, price);
     }
 }
