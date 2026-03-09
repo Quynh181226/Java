@@ -1,4 +1,4 @@
-package JavaAdvancedd.Ss1;
+package JavaAdvanced.Ss1;
 
 public class Ex5 {
     public static class User {

@@ -1,4 +1,4 @@
-package JavaAdvancedd.Ss1;
+package JavaAdvanced.Ss1;
 
 import java.io.IOException;
 
