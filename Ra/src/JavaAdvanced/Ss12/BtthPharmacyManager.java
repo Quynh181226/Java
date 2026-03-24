@@ -62,7 +62,7 @@ public class BtthPharmacyManager {
     }
 
     public static void main(String[] args) {
-        PharmacyManager manager = new PharmacyManager();
+        BtthPharmacyManager manager = new BtthPharmacyManager();
         Scanner sc = new Scanner(System.in);
 
         try {
