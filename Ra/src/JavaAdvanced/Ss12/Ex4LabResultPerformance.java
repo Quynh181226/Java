@@ -31,7 +31,7 @@ public class Ex4LabResultPerformance {
     public void insertBulkResults(List<TestResult> list) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String sql = "INSERT INTO Results(data) VALUES (?)";
+        String sql = "insert into Results(data) values (?)";
 
         try {
             Class.forName(DbConfig.DRIVER);
