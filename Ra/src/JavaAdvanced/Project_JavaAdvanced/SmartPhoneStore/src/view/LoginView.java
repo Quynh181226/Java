@@ -1,7 +1,7 @@
 package JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.view;
 
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service.AuthService;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.User;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.User;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.util.Console;
 import java.sql.SQLException;
 

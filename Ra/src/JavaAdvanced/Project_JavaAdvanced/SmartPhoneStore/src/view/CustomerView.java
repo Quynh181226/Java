@@ -1,11 +1,11 @@
 package JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.view;
 
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.User;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.Product;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.Order;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.OrderDetail;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.Coupon;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.FlashSale;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.User;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Product;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Order;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.OrderDetail;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Coupon;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.FlashSale;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service.ProductService;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service.OrderService;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service.CartService;

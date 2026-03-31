@@ -1,7 +1,7 @@
 package JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.imps;
 
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces.CategoryDAO;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.Category;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Category;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.util.DBConnection;
 import java.sql.*;
 import java.util.ArrayList;

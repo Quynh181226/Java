@@ -4,8 +4,8 @@ import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces.Orde
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.imps.OrderDAOImpl;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces.ProductDAO;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.imps.ProductDAOImpl;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.Order;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.OrderDetail;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Order;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.OrderDetail;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.*;

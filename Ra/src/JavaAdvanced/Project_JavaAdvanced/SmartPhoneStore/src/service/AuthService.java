@@ -2,7 +2,7 @@ package JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service;
 
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.imps.UserDAOImpl;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces.UserDAO;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.User;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.User;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.util.BCrypt;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.util.Validator;
 import java.sql.SQLException;
@@ -38,8 +38,7 @@ public class AuthService {
         return user;
     }
 
-    public boolean register(String fullName, String email, String password,
-                            String confirmPassword, String phone, String address) throws SQLException {
+    public boolean register(String fullName, String email, String password, String confirmPassword, String phone, String address) throws SQLException {
         if (fullName == null || fullName.trim().isEmpty()) {
             throw new IllegalArgumentException("Ho ten khong duoc de trong");
         }
@@ -67,13 +66,13 @@ public class AuthService {
         return userDAO.save(user);
     }
 
-//    public boolean checkUserExists(String email, String phone) throws SQLException {
-//        User user = userDAO.findByEmail(email);
-//        if (user == null) {
-//            return false;
-//        }
-//        return user.getPhone().equals(phone);
-//    }
+    //public boolean checkUserExists(String email, String phone) throws SQLException {
+    //    User user = userDAO.findByEmail(email);
+    //    if (user == null) {
+    //        return false;
+    //    }
+    //    return user.getPhone().equals(phone);
+    //}
 
     public boolean checkUserExists(String email) throws SQLException {
         return userDAO.findByEmail(email) != null;

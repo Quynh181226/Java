@@ -1,7 +1,7 @@
 package JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.imps;
 
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces.ProductDAO;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.Product;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Product;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.util.DBConnection;
 
 import java.sql.*;

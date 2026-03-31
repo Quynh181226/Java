@@ -1,6 +1,6 @@
 package JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces;
 
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.FlashSale;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.FlashSale;
 import java.sql.SQLException;
 import java.util.List;
 

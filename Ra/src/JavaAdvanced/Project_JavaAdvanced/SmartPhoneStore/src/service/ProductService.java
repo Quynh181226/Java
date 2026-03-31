@@ -2,7 +2,7 @@ package JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service;
 
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces.ProductDAO;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.imps.ProductDAOImpl;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.Product;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Product;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.util.Validator;
 import java.math.BigDecimal;
 import java.sql.SQLException;

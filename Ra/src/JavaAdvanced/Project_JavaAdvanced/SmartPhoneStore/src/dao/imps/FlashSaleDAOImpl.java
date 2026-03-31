@@ -1,7 +1,7 @@
 package JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.imps;
 
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces.FlashSaleDAO;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.FlashSale;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.FlashSale;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.util.DBConnection;
 import java.sql.*;
 import java.util.ArrayList;

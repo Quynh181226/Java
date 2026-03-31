@@ -2,7 +2,7 @@ package JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service;
 
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces.CouponDAO;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.imps.CouponDAOImpl;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.Coupon;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Coupon;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -51,8 +51,7 @@ public class CouponService {
         return discount;
     }
 
-    public boolean addCoupon(String code, int discountPercent, LocalDate validFrom, LocalDate validTo,
-                             int maxUsage, BigDecimal minOrderAmount) throws SQLException {
+    public boolean addCoupon(String code, int discountPercent, LocalDate validFrom, LocalDate validTo, int maxUsage, BigDecimal minOrderAmount) throws SQLException {
         if (code == null || code.trim().isEmpty()) {
             throw new IllegalArgumentException("Ma giam gia khong duoc de trong");
         }
@@ -88,9 +87,7 @@ public class CouponService {
         return couponDAO.save(coupon);
     }
 
-    public boolean updateCoupon(int id, String code, int discountPercent, LocalDate validFrom,
-                                LocalDate validTo, int maxUsage, BigDecimal minOrderAmount,
-                                boolean isActive) throws SQLException {
+    public boolean updateCoupon(int id, String code, int discountPercent, LocalDate validFrom, LocalDate validTo, int maxUsage, BigDecimal minOrderAmount, boolean isActive) throws SQLException {
         Coupon coupon = couponDAO.findById(id);
         if (coupon == null) {
             throw new IllegalArgumentException("Khong tim thay ma giam gia");

@@ -6,9 +6,9 @@ import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces.Orde
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.imps.OrderDetailDAOImpl;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces.FlashSaleDAO;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.imps.FlashSaleDAOImpl;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.Order;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.OrderDetail;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.FlashSale;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Order;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.OrderDetail;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.FlashSale;
 import java.sql.SQLException;
 import java.util.List;
 

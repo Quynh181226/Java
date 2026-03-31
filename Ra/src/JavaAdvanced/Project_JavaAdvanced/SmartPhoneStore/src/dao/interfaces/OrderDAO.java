@@ -1,7 +1,7 @@
 package JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces;
 
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.Order;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.OrderDetail;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Order;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.OrderDetail;
 import java.sql.SQLException;
 import java.util.List;
 

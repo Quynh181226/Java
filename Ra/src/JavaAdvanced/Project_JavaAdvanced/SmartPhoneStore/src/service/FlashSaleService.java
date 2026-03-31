@@ -4,8 +4,8 @@ import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces.Flas
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.imps.FlashSaleDAOImpl;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces.ProductDAO;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.imps.ProductDAOImpl;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.FlashSale;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.Product;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.FlashSale;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Product;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.time.LocalDateTime;

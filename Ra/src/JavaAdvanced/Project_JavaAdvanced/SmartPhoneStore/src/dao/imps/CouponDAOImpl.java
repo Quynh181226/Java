@@ -1,7 +1,7 @@
 package JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.imps;
 
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces.CouponDAO;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.Coupon;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Coupon;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.util.DBConnection;
 import java.sql.*;
 import java.util.ArrayList;

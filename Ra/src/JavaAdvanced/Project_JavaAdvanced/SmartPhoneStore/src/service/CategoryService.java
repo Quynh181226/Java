@@ -2,7 +2,7 @@ package JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service;
 
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.interfaces.CategoryDAO;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.dao.imps.CategoryDAOImpl;
-import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.entity.Category;
+import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Category;
 
 import java.sql.SQLException;
 import java.util.List;
