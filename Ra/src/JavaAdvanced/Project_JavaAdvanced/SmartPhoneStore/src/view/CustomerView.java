@@ -164,15 +164,6 @@ private void viewAllProducts() throws SQLException {
         if (products.isEmpty()) {
             Console.printInfo("Khong tim thay san pham nao");
         } else {
-//            Console.printTableHeader("ID", "TEN SAN PHAM", "HANG", "GIA", "TON KHO");
-//            for (Product p : products) {
-//                Console.printTableRow(p.getId(),
-//                        p.getName().length() > 20 ? p.getName().substring(0, 17) + "..." : p.getName(),
-//                        p.getBrand(),
-//                        p.getPrice() + " VND",
-//                        p.getStock());
-//            }
-//            Console.printTableFooter();
             System.out.println("┌─── Danh Sách Sản Phẩm ────┐");
             System.out.println("├────────────┬──────────────────────────────┬──────────────────────┬──────────────────────┬──────────────┤");
             System.out.printf ("│ %-10s │ %-28s │ %-20s │ %-20s │ %-12s │\n", "ID", "TEN SAN PHAM", "HANG", "GIA", "TON KHO");
@@ -199,16 +190,6 @@ private void viewAllProducts() throws SQLException {
                 return;
             }
 
-//            Console.printTableHeader("ID", "SAN PHAM", "SO LUONG", "DON GIA", "THANH TIEN");
-//            for (Map.Entry<Integer, CartService.CartItem> entry : cartService.getCart().entrySet()) {
-//                CartService.CartItem item = entry.getValue();
-//                Console.printTableRow(item.getProduct().getId(),
-//                        item.getProduct().getName().length() > 15 ? item.getProduct().getName().substring(0, 12) + "..." : item.getProduct().getName(),
-//                        item.getQuantity(),
-//                        item.getProduct().getPrice() + " VND",
-//                        item.getSubtotal() + " VND");
-//            }
-//            Console.printTableFooter();
             System.out.println("┌─── Giỏ hàng ────┐");
             System.out.println("├────────────┬──────────────────────────────┬──────────────────────┬──────────────────────┬──────────────┤");
             System.out.printf ("│ %-10s │ %-28s │ %-20s │ %-20s │ %-12s │\n", "ID", "SAN PHAM", "SO LUONG", "DON GIA", "THANH TIEN");
@@ -332,14 +313,6 @@ private void viewAllProducts() throws SQLException {
         if (orders.isEmpty()) {
             Console.printInfo("Chua co don hang nao");
         } else {
-//            Console.printTableHeader("ID", "NGAY DAT", "TONG TIEN", "TRANG THAI");
-//            for (Order o : orders) {
-//                Console.printTableRow(o.getId(),
-//                        o.getOrderDate(),
-//                        o.getTotalAmount() + " VND",
-//                        getStatusText(o.getStatus()));
-//            }
-//            Console.printTableFooter();
             System.out.println("┌─── Lich Su Don Hang ────┐");
             System.out.println("├────────────┬──────────────────────┬────────────────────────┬─────────────────┤");
             System.out.printf ("│ %-10s │ %-20s │ %-22s │ %-15s │\n", "ID", "NGAY DAT", "TONG TIEN", "TRANG THAI");
@@ -382,12 +355,6 @@ private void viewAllProducts() throws SQLException {
 
         List<OrderDetail> details = orderService.getOrderDetails(orderId);
         if (!details.isEmpty()) {
-//            Console.printTableHeader("SAN PHAM", "SO LUONG", "DON GIA", "THANH TIEN");
-//            for (OrderDetail d : details) {
-//                BigDecimal subtotal = d.getPrice().multiply(BigDecimal.valueOf(d.getQuantity()));
-//                Console.printTableRow(d.getProductName(), d.getQuantity(), d.getPrice() + " VND", subtotal + " VND");
-//            }
-//            Console.printTableFooter();
             System.out.println("┌─── Chi Tiet Don Hang ────┐");
             System.out.println("├──────────────────────────────┬──────────────┬──────────────────────┬──────────────────────┤");
             System.out.printf ("│ %-28s │ %-12s │ %-20s │ %-20s │\n", "SAN PHAM", "SO LUONG", "DON GIA", "THANH TIEN");
@@ -475,20 +442,12 @@ private void viewAllProducts() throws SQLException {
     }
 
     private void useCoupon() throws SQLException {
-//        ConsoleUtils.clearScreen();
-//        Console.printHeader("MA GIAM GIA");
         System.out.println("- - - - Mã giảm giá:");
         List<Coupon> coupons = couponService.getActiveCoupons();
 
         if (coupons.isEmpty()) {
             Console.printInfo("Hien khong co ma giam gia nao");
         } else {
-//            Console.printTableHeader("MA", "GIAM", "TOI THIEU", "HAN SU DUNG");
-//            for (Coupon c : coupons) {
-//                Console.printTableRow(c.getCode(), c.getDiscountPercent() + "%",
-//                        c.getMinOrderAmount() + " VND", c.getValidTo());
-//            }
-//            Console.printTableFooter();
             System.out.println("┌─── Ma Giam Gia ────┐");
             System.out.println("├──────────────────────┬──────────────┬──────────────────────┬──────────────────────┤");
             System.out.printf ("│ %-20s │ %-12s │ %-20s │ %-20s │\n", "MA", "GIAM", "TOI THIEU", "HAN SU DUNG");
@@ -510,12 +469,6 @@ private void viewAllProducts() throws SQLException {
         if (flashSales.isEmpty()) {
             Console.printInfo("Hien khong co chuong trinh flash sale nao");
         } else {
-//            Console.printTableHeader("ID", "SAN PHAM", "GIA FLASH", "SO LUONG", "HAN DEN");
-//            for (FlashSale fs : flashSales) {
-//                Console.printTableRow(fs.getId(), fs.getProductName(),
-//                        fs.getFlashPrice() + " VND", fs.getFlashQuantity(), fs.getEndTime());
-//            }
-//            Console.printTableFooter();
             System.out.println("┌─── Flash Sale ────┐");
             System.out.println("├────────────┬──────────────────────────────┬──────────────────────┬──────────────┬──────────────────────┤");
             System.out.printf ("│ %-10s │ %-28s │ %-20s │ %-12s │ %-20s │\n", "ID", "SAN PHAM", "GIA FLASH", "SO LUONG", "HAN DEN");

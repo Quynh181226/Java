@@ -142,4 +142,5 @@ use smartphone_store;
 --     (1, 1, 1, 29990000.00),
 --     (2, 3, 1, 28490000.00),
 --     (3, 6, 1, 6990000.00);
--- Đây là db của tôi tôi đã execute success : giờ hãy code 1. Màn hình khởi động & Xác thực, 1.1 Đăng nhập, 1.2 Đăng ký tài khoản: Nhớ là thiết kế giao diện bảng,... sao cho đẹp nhé có thể có màu hay gì đó nhưng mà phải phù hợp với từng trang và thành phần của trang đó....
+ALTER TABLE categories ADD COLUMN is_deleted BOOLEAN DEFAULT FALSE;
+ALTER TABLE categories ADD INDEX idx_is_deleted (is_deleted);
