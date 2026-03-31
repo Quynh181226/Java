@@ -58,25 +58,8 @@ private static final String PASSWORD = "your_password"; // Mật khẩu MySQL
 - Mở project trong IntelliJ/Eclipse/NetBeans
 - Chạy file `Main.java`
 
-#### Cách 2: Chạy bằng terminal
-
-```bash
-# Biên dịch
-javac -d out -cp lib/mysql-connector-java-8.0.33.jar src/**/*.java
-
-# Chạy (Windows)
-java -cp out;lib/mysql-connector-java-8.0.33.jar Main
-
-# Chạy (Linux/Mac)
-java -cp out:lib/mysql-connector-java-8.0.33.jar Main
-```
-
-**Lưu ý:** Chạy với UTF-8 để hiển thị tốt hơn:
-```bash
-java -Dfile.encoding=UTF-8 -cp out:lib/mysql-connector-java-8.0.33.jar Main
-```
-
 --- 
+***Cấu trúc thư mục dự án:*** 
 
     SmartPhoneStore/
         └── src/
@@ -134,8 +117,7 @@ java -Dfile.encoding=UTF-8 -cp out:lib/mysql-connector-java-8.0.33.jar Main
             │   ├── Color.java                                 # Màu sắc console
             │   ├── Console.java                               # Nhập/xuất console
             │   ├── DBConnection.java                          # Kết nối database
-            │   ├── Validator.java                             # Validation dữ liệu
-            │   └── IMethod.java                               # (Có thể xóa - không dùng)
+            │   └── Validator.java                             # Validation dữ liệu
             
             ├── exception/                                     # Custom exceptions
             │   ├── CouponExpiredException.java
@@ -145,20 +127,9 @@ java -Dfile.encoding=UTF-8 -cp out:lib/mysql-connector-java-8.0.33.jar Main
             
             └── sql/                                           # Script database
                 └── db.sql                                     # Tạo bảng và dữ liệu mẫu
-njfn
-
-## Tài khoản mặc định
-
-| Vai trò     | Email                    | Mật khẩu   |
-|-------------|--------------------------|------------|
-| **Admin**   | admin@smartphone.com     | admin123   |
-| **Customer**| nguyenvana@email.com     | 123456     |
-
-Có thể đăng ký tài khoản Customer mới từ menu đăng nhập.
 
 ---
-
-## Chức năng chi tiết
+### _Chức năng chi tiết_
 
 ### Admin
 
@@ -184,9 +155,7 @@ Có thể đăng ký tài khoản Customer mới từ menu đăng nhập.
 | 7   | Mã giảm giá            | Xem danh sách mã giảm giá đang có hiệu lực |
 | 8   | Thông tin cá nhân      | Cập nhật thông tin, đổi mật khẩu |
 
----
-
-## Tính năng bảo mật
+### Tính năng bảo mật
 
 | Tính năng                | Mô tả |
 |--------------------------|-------|
@@ -195,9 +164,7 @@ Có thể đăng ký tài khoản Customer mới từ menu đăng nhập.
 | Phân quyền               | Admin và Customer có menu riêng biệt |
 | Transaction              | Đặt hàng được bọc trong transaction, đảm bảo toàn vẹn dữ liệu |
 
----
-
-## Validation đã được kiểm tra
+### Validation đã được kiểm tra
 
 | Trường hợp                        | Xử lý |
 |-----------------------------------|-------|
@@ -208,9 +175,7 @@ Có thể đăng ký tài khoản Customer mới từ menu đăng nhập.
 | Mã giảm giá hết hạn               | Thông báo lỗi, không áp dụng |
 | Flash sale hết số lượng           | Thông báo lỗi, không cho mua |
 
----
-
-## Cấu trúc bảng dữ liệu (Database Schema)
+### Cấu trúc bảng dữ liệu (Database Schema)
 
 | Bảng              | Mô tả |
 |-------------------|-------|
@@ -224,18 +189,14 @@ Có thể đăng ký tài khoản Customer mới từ menu đăng nhập.
 | `coupon_brands`   | Hãng áp dụng mã giảm giá |
 | `flash_sales`     | Chương trình flash sale |
 
----
-
-## Lưu ý khi chạy
+### _Lưu ý khi chạy_
 
 1. **MySQL phải đang chạy** trước khi khởi động ứng dụng
 2. Đảm bảo **JDBC driver** (`mysql-connector-java-8.0.33.jar`) đã được thêm vào classpath
 3. Nếu gặp lỗi kết nối, kiểm tra lại `USER` và `PASSWORD` trong `DBConnection.java`
 4. Dữ liệu mẫu đã được insert sẵn qua file `db.sql`
 
----
-
-## Xử lý lỗi thường gặp
+### Xử lý lỗi thường gặp
 
 | Lỗi                              | Nguyên nhân                          | Cách khắc phục |
 |----------------------------------|--------------------------------------|----------------|
@@ -244,23 +205,12 @@ Có thể đăng ký tài khoản Customer mới từ menu đăng nhập.
 | `SQLException: Unknown database` | Database chưa được tạo               | Tạo database `smartphone_store` |
 | Lỗi font chữ console             | Encoding không đúng                  | Chạy với `-Dfile.encoding=UTF-8` |
 
----
+### Người thực hiện
 
-## Tác giả
+| Họ tên  |
+|---------|
+| [Quỳnh] |
 
-| Họ tên       | Vai trò    |
-|--------------|------------|
-| [Your Name]  | Developer  |
-
----
-
-## License
+### _License_
 
 Dự án được phát triển cho mục đích học tập.
-
----
-
-**Chúc bạn sử dụng ứng dụng thành công!**
-```
-
-Bạn chỉ cần copy toàn bộ nội dung trên và dán vào file `README.md` là xong. Đã được viết lại sạch sẽ, chuyên nghiệp và không có icon emoji như yêu cầu.

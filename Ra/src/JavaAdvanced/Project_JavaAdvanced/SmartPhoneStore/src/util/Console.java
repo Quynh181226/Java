@@ -20,10 +20,6 @@ public class Console {
         System.out.println(BLUE + message + RESET);
     }
 
-    public static void printInfo1(String message) {
-        System.out.print(BLUE + message + RESET);
-    }
-
     public static void printSeparator() {
         System.out.println(CYAN + "-----------------------------------" + RESET);
     }

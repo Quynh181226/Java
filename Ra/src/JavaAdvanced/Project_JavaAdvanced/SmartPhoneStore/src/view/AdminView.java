@@ -450,19 +450,19 @@ public class AdminView {
 
     private void manageOrders() {
         while (true) {
+            System.out.println();
             System.out.println("""
-                ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-                |                                    Quan Ly Don Hang                                  |
-                ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-                ┃                                                                                      ┃
-                ┃    1. Xem Danh Sach Don Hang                                                         ┃
-                ┃    2. Xem Don Hang Theo Trang Thai                                                   ┃
-                ┃    3. Cap Nhat Trang Thai Don Hang                                                   ┃
-                ┃    4. Xem Chi Tiet Don Hang                                                          ┃
-                ┃    0. Quay Lai                                                                       ┃
-                ┃                                                                                      ┃
-                ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-            """);
+            ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+            |                                    Quan Ly Don Hang                                  |
+            ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+            ┃                                                                                      ┃
+            ┃    1. Xem Danh Sach Don Hang                                                         ┃
+            ┃    2. Xem Don Hang Theo Trang Thai                                                   ┃
+            ┃    3. Cap Nhat Trang Thai Don Hang                                                   ┃
+            ┃    4. Xem Chi Tiet Don Hang                                                          ┃
+            ┃    0. Quay Lai                                                                       ┃
+            ┃                                                                                      ┃
+            ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛""");
 
             int choice = Console.inputInt("Lua chon cua ban: ");
 
@@ -508,7 +508,7 @@ public class AdminView {
         List<Order> orders = orderService.getOrdersByStatus(status);
 
         if (orders.isEmpty()) {
-            Console.printInfo1("Khong co don hang nao voi trang thai: " + status.substring(0, 1).toUpperCase()
+            Console.printInfo("Khong co don hang nao voi trang thai: " + status.substring(0, 1).toUpperCase()
                                                                         + status.substring(1).toLowerCase()
             );
         } else {
@@ -565,7 +565,7 @@ public class AdminView {
             return;
         }
 
-        System.out.println();
+//        System.out.println();
         Console.printInfo("\n- - - - Thong tin đon hang :");
         Console.printSeparator();
 
@@ -590,14 +590,14 @@ public class AdminView {
             Console.printInfo("Khong co san pham nao !!");
         } else {
             System.out.println("┌─── Chi tiet san pham ────┐");
-            System.out.println("┌───────────────────────────┬─────────┬────────────┬────────────┐");
-            System.out.printf("│ %-25s │ %-7s │ %-10s │ %-10s │\n", "San Pham", "So Luong", "Don Gia", "Thanh Tien");
-            System.out.println("├───────────────────────────┼─────────┼────────────┼────────────┤");
+            System.out.println("┌───────────────────────────┬──────────┬──────────────────┬────────────────────┐");
+            System.out.printf("│ %-25s │ %-7s │ %-15s  │ %-17s  │\n", "San Pham", "So Luong", "Don Gia", "Thanh Tien");
+            System.out.println("├───────────────────────────┼──────────┼──────────────────┼────────────────────┤");
             for (OrderDetail d : details) {
                 BigDecimal subtotal = d.getPrice().multiply(BigDecimal.valueOf(d.getQuantity()));
-                System.out.printf("│ %-25s │ %-7d │ %-10s │ %-10s │\n", d.getProductName().length() > 25 ? d.getProductName().substring(0, 22) + "..." : d.getProductName(), d.getQuantity(), d.getPrice() + " VND", subtotal + " VND");
+                System.out.printf("│ %-25s │ %-7d  │ %-15s  │ %-17s  │\n", d.getProductName().length() > 25 ? d.getProductName().substring(0, 22) + "..." : d.getProductName(), d.getQuantity(), d.getPrice() + " VND", subtotal + " VND");
             }
-            System.out.println("└───────────────────────────┴─────────┴────────────┴────────────┘");
+            System.out.println("└───────────────────────────┴──────────┴──────────────────┴────────────────────┘");
         }
     }
 
