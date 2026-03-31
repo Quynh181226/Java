@@ -138,6 +138,7 @@ public class CouponDAOImpl implements CouponDAO {
         coupon.setUsedCount(rs.getInt("used_count"));
         coupon.setMinOrderAmount(rs.getBigDecimal("min_order_amount"));
         coupon.setActive(rs.getBoolean("is_active"));
+        coupon.setApplicableType(rs.getString("applicable_type") != null ? rs.getString("applicable_type") : "ALL");
         return coupon;
     }
 }

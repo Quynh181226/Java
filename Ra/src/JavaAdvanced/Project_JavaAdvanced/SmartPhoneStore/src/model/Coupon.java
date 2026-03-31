@@ -2,6 +2,7 @@ package JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 public class Coupon {
     private int id;
@@ -13,6 +14,9 @@ public class Coupon {
     private int usedCount;
     private BigDecimal minOrderAmount;
     private boolean isActive;
+    private String applicableType; // "All", "Brand", "Product"
+    private Set<String> applicableBrands;
+    private Set<Integer> applicableProductIds;
 
     public Coupon() {}
 
@@ -42,6 +46,9 @@ public class Coupon {
 
     public boolean isActive() { return isActive; }
     public void setActive(boolean active) { isActive = active; }
+
+    public String getApplicableType() { return applicableType; }
+    public void setApplicableType(String applicableType) { this.applicableType = applicableType; }
 
     public boolean isValid() {
         LocalDate now = LocalDate.now();

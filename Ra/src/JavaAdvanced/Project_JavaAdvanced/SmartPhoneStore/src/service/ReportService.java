@@ -21,7 +21,7 @@ public class ReportService {
 
     public BigDecimal getTotalRevenue() throws SQLException {
         List<Order> orders = orderDAO.findAll();
-        BigDecimal total = BigDecimal.ZERO;
+        BigDecimal total = BigDecimal.valueOf(0);
         for (Order order : orders) {
             if (order.getStatus().equalsIgnoreCase("Delivered")) {
                 total = total.add(order.getTotalAmount());
@@ -32,7 +32,7 @@ public class ReportService {
 
     public BigDecimal getRevenueByMonth(int month, int year) throws SQLException {
         List<Order> orders = orderDAO.findAll();
-        BigDecimal total = BigDecimal.ZERO;
+        BigDecimal total = BigDecimal.valueOf(0);
         for (Order order : orders) {
             if (order.getStatus().equalsIgnoreCase("Delivered")) {
                 java.sql.Timestamp ts = order.getOrderDate();
@@ -49,16 +49,39 @@ public class ReportService {
     }
 
     public Map<String, Integer> getTopSellingProducts(int limit) throws SQLException {
+        // Lấy tháng hiện tại
+        java.util.Calendar now = java.util.Calendar.getInstance();
+        int currentMonth = now.get(java.util.Calendar.MONTH) + 1;
+        int currentYear = now.get(java.util.Calendar.YEAR);
+
+        return getTopSellingProductsByMonth(currentMonth, currentYear, limit);
+    }
+
+    public Map<String, Integer> getTopSellingProductsByMonth(int month, int year, int limit) throws SQLException {
         List<Order> orders = orderDAO.findAll();
         Map<Integer, Integer> productSales = new HashMap<>();
 
         for (Order order : orders) {
-            if (order.getStatus().equalsIgnoreCase("Delivered")) {
-                List<OrderDetail> details = orderDAO.getOrderDetails(order.getId());
-                for (OrderDetail detail : details) {
-                    productSales.put(detail.getProductId(),
-                            productSales.getOrDefault(detail.getProductId(), 0) + detail.getQuantity());
-                }
+            // Chỉ lấy đơn hàng đã giao
+            if (!order.getStatus().equalsIgnoreCase("Delivered")) {
+                continue;
+            }
+
+            // Lọc theo tháng và năm
+            java.sql.Timestamp ts = order.getOrderDate();
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.setTimeInMillis(ts.getTime());
+            int orderMonth = cal.get(java.util.Calendar.MONTH) + 1;
+            int orderYear = cal.get(java.util.Calendar.YEAR);
+
+            if (orderMonth != month || orderYear != year) {
+                continue;
+            }
+
+            List<OrderDetail> details = orderDAO.getOrderDetails(order.getId());
+            for (OrderDetail detail : details) {
+                productSales.put(detail.getProductId(),
+                        productSales.getOrDefault(detail.getProductId(), 0) + detail.getQuantity());
             }
         }
 

@@ -99,20 +99,20 @@ public class UserDAOImpl implements UserDAO {
         return users;
     }
 
-    @Override
-    public List<User> findByRole(String role) throws SQLException {
-        List<User> users = new ArrayList<>();
-        String sql = "SELECT id, full_name, email, password, phone, address, role, is_active FROM users WHERE role = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, role);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                users.add(mapResultSetToUser(rs));
-            }
-        }
-        return users;
-    }
+//    @Override
+//    public List<User> findByRole(String role) throws SQLException {
+//        List<User> users = new ArrayList<>();
+//        String sql = "SELECT id, full_name, email, password, phone, address, role, is_active FROM users WHERE role = ?";
+//        try (Connection conn = DBConnection.getConnection();
+//             PreparedStatement stmt = conn.prepareStatement(sql)) {
+//            stmt.setString(1, role);
+//            ResultSet rs = stmt.executeQuery();
+//            while (rs.next()) {
+//                users.add(mapResultSetToUser(rs));
+//            }
+//        }
+//        return users;
+//    }
 
     private User mapResultSetToUser(ResultSet rs) throws SQLException {
         User user = new User();

@@ -16,8 +16,7 @@ public class Product {
 
     public Product() {}
 
-    public Product(String name, String brand, String capacity, String color,
-                   BigDecimal price, int stock, String description, int categoryId) {
+    public Product(String name, String brand, String capacity, String color, BigDecimal price, int stock, String description, int categoryId) {
         this.name = name;
         this.brand = brand;
         this.capacity = capacity;

@@ -7,6 +7,4 @@ import java.util.List;
 public interface OrderDetailDAO {
     List<OrderDetail> findByOrderId(int orderId) throws SQLException;
     boolean save(OrderDetail orderDetail) throws SQLException;
-    boolean saveBatch(List<OrderDetail> orderDetails) throws SQLException;
-    boolean deleteByOrderId(int orderId) throws SQLException;
 }

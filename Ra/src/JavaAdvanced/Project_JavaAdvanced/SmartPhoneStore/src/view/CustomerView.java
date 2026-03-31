@@ -10,6 +10,7 @@ import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service.ProductServ
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service.OrderService;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service.CartService;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service.CouponService;
+import static JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.util.Console.getStatusText;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service.FlashSaleService;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service.ReportService;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service.AuthService;
@@ -54,37 +55,23 @@ public class CustomerView {
             System.out.println("|    5. THONG TIN CA NHAN   |    6. SU DUNG MA GIAM GIA   |    7. FLASH SALE     |     0. DANG XUAT    |");
             System.out.println("|                           |                             |                      |                     |");
             System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━┛");
-//            System.out.println();
+
             int choice = Console.inputInt("Lua chon cua ban: ");
 
             try {
                 switch (choice) {
-                    case 1:
-                        viewAllProducts();
-                        break;
-                    case 2:
-                        searchProducts();
-                        break;
-                    case 3:
-                        manageCart();
-                        break;
-                    case 4:
-                        viewOrderHistory();
-                        break;
-                    case 5:
-                        viewProfile();
-                        break;
-                    case 6:
-                        useCoupon();
-                        break;
-                    case 7:
-                        viewFlashSales();
-                        break;
-                    case 0:
-                        Console.printSuccess("Dang xuat thanh cong!");
+                    case 1 -> viewAllProducts();
+                    case 2 -> searchProducts();
+                    case 3 -> manageCart();
+                    case 4 -> viewOrderHistory();
+                    case 5 -> viewProfile();
+                    case 6 -> useCoupon();
+                    case 7 -> viewFlashSales();
+                    case 0 -> {
+                        Console.printSuccess("Dang xuat thanh cong !!");
                         return;
-                    default:
-                        Console.printError("Lua chon khong hop le");
+                    }
+                    default -> Console.printError("Lua chon khong hop le");
                 }
             } catch (SQLException e) {
                 Console.printError("Loi ket noi database: " + e.getMessage());
@@ -94,39 +81,49 @@ public class CustomerView {
         }
     }
 
-private void viewAllProducts() throws SQLException {
-    List<Product> products = productService.getAllProducts();
+    private void viewAllProducts() throws SQLException {
+        System.out.println("1. Xem tat ca san pham con hang");
+        System.out.println("2. Sap xep theo gia tang dan");
+        System.out.println("3. Sap xep theo gia giam dan");
+        System.out.println("0. Quay lai");
 
-    if (products.isEmpty()) {
-        Console.printInfo("Chua co san pham nao");
-    } else {
-        System.out.println("┌─── Danh Sách Sản Phẩm ────┐");
-        System.out.println("┌────────────┬──────────────────────────────┬──────────────────────┬──────────────────────┬──────────────┐");
-        System.out.printf ("│ %-10s │ %-28s │ %-20s │ %-20s │ %-12s │\n", "ID", "TEN SAN PHAM", "HANG", "GIA", "TON KHO");
-        System.out.println("├────────────┼──────────────────────────────┼──────────────────────┼──────────────────────┼──────────────┤");
+        int sortChoice = Console.inputInt("Lua chon: ");
 
-        for (Product p : products) {
-            String name = p.getName().length() > 28
-                    ? p.getName().substring(0, 25) + "..."
-                    : p.getName();
-
-            System.out.printf ("│ %-10s │ %-28s │ %-20s │ %-20s │ %-12s │\n",
-                    p.getId(),
-                    name,
-                    p.getBrand(),
-                    p.getPrice() + " VND",
-                    p.getStock());
+        List<Product> products;
+        switch (sortChoice) {
+            case 2 -> {
+                products = productService.getInStockProductsSortedByPrice("ASC");
+                Console.printInfo("Sap xep theo gia tang dan");
+            }
+            case 3 -> {
+                products = productService.getInStockProductsSortedByPrice("DESC");
+                Console.printInfo("Sap xep theo gia giam dan");
+            }
+            default -> products = productService.getInStockProducts();
         }
 
-        System.out.println("└────────────┴──────────────────────────────┴──────────────────────┴──────────────────────┴──────────────┘");
-    }
+        if (products.isEmpty()) {
+            Console.printInfo("Hien khong co san pham nao con hang!");
+        } else {
+            System.out.println("┌─── Danh Sach San Pham Con Hang ────┐");
+            System.out.println("├────────────┬──────────────────────────────┬──────────────────────┬──────────────────────┬──────────────┤");
+            System.out.printf("│ %-10s │ %-28s │ %-20s │ %-20s │ %-12s │\n", "ID", "TEN SAN PHAM", "HANG", "GIA", "TON KHO");
+            System.out.println("├────────────┼──────────────────────────────┼──────────────────────┼──────────────────────┼──────────────┤");
 
-    System.out.println();
-    int productId = Console.inputInt("Nhap ID san pham de xem chi tiet (0 de quay lai): ");
-    if (productId > 0) {
-        viewProductDetail(productId);
+            for (Product p : products) {
+                String name = p.getName().length() > 28 ? p.getName().substring(0, 25) + "..." : p.getName();
+                System.out.printf("│ %-10s │ %-28s │ %-20s │ %-20s │ %-12s │\n",
+                        p.getId(), name, p.getBrand(), p.getPrice() + " VND", p.getStock());
+            }
+            System.out.println("└────────────┴──────────────────────────────┴──────────────────────┴──────────────────────┴──────────────┘");
+        }
+
+        //0 de quay lai
+        int productId = Console.inputInt("Nhap ID san pham de xem chi tiet: ");
+        if (productId > 0) {
+            viewProductDetail(productId);
+        }
     }
-}
 
     private void viewProductDetail(int productId) throws SQLException {
         Product product = productService.getProductById(productId);
@@ -156,7 +153,7 @@ private void viewAllProducts() throws SQLException {
     }
 
     private void searchProducts() throws SQLException {
-        System.out.println("TIM KIEM SAN PHAM");
+        System.out.println("\n- - - -Tim kiem san pham:");
 
         String keyword = Console.inputString("Nhap tu khoa tim kiem: ");
         List<Product> products = productService.searchProducts(keyword);
@@ -164,9 +161,9 @@ private void viewAllProducts() throws SQLException {
         if (products.isEmpty()) {
             Console.printInfo("Khong tim thay san pham nao");
         } else {
-            System.out.println("┌─── Danh Sách Sản Phẩm ────┐");
+            System.out.println("┌─── Danh Sach San Pham ────┐");
             System.out.println("├────────────┬──────────────────────────────┬──────────────────────┬──────────────────────┬──────────────┤");
-            System.out.printf ("│ %-10s │ %-28s │ %-20s │ %-20s │ %-12s │\n", "ID", "TEN SAN PHAM", "HANG", "GIA", "TON KHO");
+            System.out.printf ("│ %-10s │ %-28s │ %-20s │ %-20s │ %-12s │\n", "ID", "Ten San Pham", "Hang", "Gia", "Ton Kho");
             System.out.println("├────────────┼──────────────────────────────┼──────────────────────┼──────────────────────┼──────────────┤");
 
             for (Product p : products) {
@@ -183,16 +180,14 @@ private void viewAllProducts() throws SQLException {
 
     private void manageCart() throws SQLException {
         while (true) {
-            System.out.println("GIO HANG CUA BAN");
-
             if (cartService.isEmpty()) {
                 Console.printInfo("Gio hang trong");
                 return;
             }
 
-            System.out.println("┌─── Giỏ hàng ────┐");
+            System.out.println("┌─── Gio hang ────┐");
             System.out.println("├────────────┬──────────────────────────────┬──────────────────────┬──────────────────────┬──────────────┤");
-            System.out.printf ("│ %-10s │ %-28s │ %-20s │ %-20s │ %-12s │\n", "ID", "SAN PHAM", "SO LUONG", "DON GIA", "THANH TIEN");
+            System.out.printf ("│ %-10s │ %-28s │ %-20s │ %-20s │ %-12s │\n", "ID", "San Pham", "So Luong", "Don Gia", "Thanh Tien");
             System.out.println("├────────────┼──────────────────────────────┼──────────────────────┼──────────────────────┼──────────────┤");
 
             for (Map.Entry<Integer, CartService.CartItem> entry : cartService.getCart().entrySet()) {
@@ -237,7 +232,7 @@ private void viewAllProducts() throws SQLException {
     }
 
     private void checkout() throws SQLException {
-        System.out.println("THANH TOAN DON HANG");
+        System.out.println("Thanh Toan Don Hang");
 
         Console.printInfo("Thong tin giao hang");
         Console.printSeparator();
@@ -246,20 +241,45 @@ private void viewAllProducts() throws SQLException {
         System.out.println("Dia chi: " + currentUser.getAddress());
         Console.printSeparator();
 
-        String couponCode = Console.inputString("Nhap ma giam gia (bo trong neu khong co): ");
+        //Empty if ko cs
+        String couponCode = Console.inputString("Nhap ma giam gia (x): ");
         BigDecimal totalAmount = cartService.getTotalAmount();
-        BigDecimal discount = BigDecimal.ZERO;
+        BigDecimal discount = BigDecimal.valueOf(0);
 
         if (!couponCode.isEmpty()) {
             try {
                 Coupon coupon = couponService.getCouponByCode(couponCode);
                 if (coupon != null && coupon.isValid()) {
-                    discount = couponService.applyCoupon(couponCode, totalAmount);
-                    Console.printSuccess("Ap dung ma giam gia thanh cong! Giam: " + discount + " VND");
+                    if (!couponService.isCouponApplicableToCart(couponCode, cartService.getCart())) {
+                        Console.printError("Ma giam gia khong ap dung cho san pham trong gio hang");
+                        couponCode = "";
+                        discount = BigDecimal.valueOf(0);
+                    } else {
+                        discount = couponService.applyCoupon(couponCode, totalAmount);
+                        Console.printSuccess("Ap dung ma giam gia thanh cong !!");
+                        System.out.println("Giam: \" + discount + \" VND\"");
+                    }
                 }
             } catch (Exception e) {
                 Console.printError(e.getMessage());
+                couponCode = "";
+                discount = BigDecimal.valueOf(0);
             }
+        }
+
+        boolean stockAvailable = true;
+        for (Map.Entry<Integer, CartService.CartItem> entry : cartService.getCart().entrySet()) {
+            CartService.CartItem item = entry.getValue();
+            Product currentProduct = productService.getProductById(item.getProduct().getId());
+            if (currentProduct == null || currentProduct.getStock() < item.getQuantity()) {
+                Console.printError("San pham " + item.getProduct().getName() + " khong du ton kho");
+                stockAvailable = false;
+            }
+        }
+
+        if (!stockAvailable) {
+            Console.printError("Vui long cap nhat lai gio hang");
+            return;
         }
 
         BigDecimal finalAmount = totalAmount.subtract(discount);
@@ -294,7 +314,7 @@ private void viewAllProducts() throws SQLException {
 
             OrderService orderService = new OrderService();
             if (orderService.createOrder(order, details)) {
-                Console.printSuccess("Dat hang thanh cong!");
+                Console.printSuccess("Dat hang thanh cong !!");
                 if (!couponCode.isEmpty()) {
                     couponService.useCoupon(couponCode);
                 }
@@ -306,8 +326,6 @@ private void viewAllProducts() throws SQLException {
     }
 
     private void viewOrderHistory() throws SQLException {
-        System.out.println("LICH SU DON HANG");
-
         List<Order> orders = orderService.getOrdersByUser(currentUser.getId());
 
         if (orders.isEmpty()) {
@@ -315,7 +333,7 @@ private void viewAllProducts() throws SQLException {
         } else {
             System.out.println("┌─── Lich Su Don Hang ────┐");
             System.out.println("├────────────┬──────────────────────┬────────────────────────┬─────────────────┤");
-            System.out.printf ("│ %-10s │ %-20s │ %-22s │ %-15s │\n", "ID", "NGAY DAT", "TONG TIEN", "TRANG THAI");
+            System.out.printf ("│ %-10s │ %-20s │ %-22s │ %-15s │\n", "ID", "Ngay Dat", "Tong Tien", "Trang Thai");
             System.out.println("├────────────┼──────────────────────┼────────────────────────┼─────────────────┤");
 
             for (Order o : orders) {
@@ -325,7 +343,8 @@ private void viewAllProducts() throws SQLException {
             System.out.println("└────────────┴──────────────────────┴────────────────────────┴─────────────────┘");
         }
 
-        int orderId = Console.inputInt("Nhap ID don hang de xem chi tiet (0 de quay lai): ");
+        //(0 de quay lai) -> Ko xem details
+        int orderId = Console.inputInt("Nhap ID don hang de xem chi tiet : ");
         if (orderId > 0) {
             viewOrderDetail(orderId);
         }
@@ -338,7 +357,7 @@ private void viewAllProducts() throws SQLException {
             return;
         }
 
-        System.out.println("CHI TIET DON HANG");
+        System.out.println("- - - - Chi tiet don hang :");
 
         Console.printSeparator();
         System.out.println("Ma don hang: " + order.getId());
@@ -357,7 +376,7 @@ private void viewAllProducts() throws SQLException {
         if (!details.isEmpty()) {
             System.out.println("┌─── Chi Tiet Don Hang ────┐");
             System.out.println("├──────────────────────────────┬──────────────┬──────────────────────┬──────────────────────┤");
-            System.out.printf ("│ %-28s │ %-12s │ %-20s │ %-20s │\n", "SAN PHAM", "SO LUONG", "DON GIA", "THANH TIEN");
+            System.out.printf ("│ %-28s │ %-12s │ %-20s │ %-20s │\n", "SanPham", "So Luong", "Don Gia", "Thanh Tien");
             System.out.println("├──────────────────────────────┼──────────────┼──────────────────────┼──────────────────────┤");
 
             for (OrderDetail d : details) {
@@ -442,7 +461,7 @@ private void viewAllProducts() throws SQLException {
     }
 
     private void useCoupon() throws SQLException {
-        System.out.println("- - - - Mã giảm giá:");
+        System.out.println("- - - - Ma giam gia:");
         List<Coupon> coupons = couponService.getActiveCoupons();
 
         if (coupons.isEmpty()) {
@@ -450,7 +469,7 @@ private void viewAllProducts() throws SQLException {
         } else {
             System.out.println("┌─── Ma Giam Gia ────┐");
             System.out.println("├──────────────────────┬──────────────┬──────────────────────┬──────────────────────┤");
-            System.out.printf ("│ %-20s │ %-12s │ %-20s │ %-20s │\n", "MA", "GIAM", "TOI THIEU", "HAN SU DUNG");
+            System.out.printf ("│ %-20s │ %-12s │ %-20s │ %-20s │\n", "Ma", "Giam", "Toi Thieu", "Han Su Dung");
             System.out.println("├──────────────────────┼──────────────┼──────────────────────┼──────────────────────┤");
 
             for (Coupon c : coupons) {
@@ -462,8 +481,6 @@ private void viewAllProducts() throws SQLException {
     }
 
     private void viewFlashSales() throws SQLException {
-        System.out.println("FLASH SALE");
-
         List<FlashSale> flashSales = flashSaleService.getActiveFlashSales();
 
         if (flashSales.isEmpty()) {
@@ -484,7 +501,8 @@ private void viewAllProducts() throws SQLException {
 
             System.out.println("└────────────┴──────────────────────────────┴──────────────────────┴──────────────┴──────────────────────┘");
 
-            int choice = Console.inputInt("Nhap ID de mua ngay (0 de quay lai): ");
+            // (0 de quay lai)
+            int choice = Console.inputInt("Nhap ID de mua ngay: ");
             if (choice > 0) {
                 buyFlashSale(choice);
             }
@@ -513,16 +531,6 @@ private void viewAllProducts() throws SQLException {
             Console.printSuccess("Da them vao gio hang voi gia flash sale");
         } else {
             Console.printError("So luong khong hop le");
-        }
-    }
-
-    private String getStatusText(String status) {
-        switch (status.toLowerCase()) {
-            case "pending": return "Chờ xử lý";
-            case "shipping": return "Đang giao";
-            case "delivered": return "Đã giao";
-            case "cancelled": return "Đã hủy";
-            default: return status;
         }
     }
 }

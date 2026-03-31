@@ -47,42 +47,42 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
         return false;
     }
 
-    @Override
-    public boolean saveBatch(List<OrderDetail> orderDetails) throws SQLException {
-        String sql = "INSERT INTO order_details (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            conn.setAutoCommit(false);
-
-            for (OrderDetail detail : orderDetails) {
-                stmt.setInt(1, detail.getOrderId());
-                stmt.setInt(2, detail.getProductId());
-                stmt.setInt(3, detail.getQuantity());
-                stmt.setBigDecimal(4, detail.getPrice());
-                stmt.addBatch();
-            }
-
-            int[] results = stmt.executeBatch();
-            conn.commit();
-
-            for (int result : results) {
-                if (result == 0) return false;
-            }
-            return true;
-        } catch (SQLException e) {
-            throw e;
-        }
-    }
-
-    @Override
-    public boolean deleteByOrderId(int orderId) throws SQLException {
-        String sql = "DELETE FROM order_details WHERE order_id = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, orderId);
-            return stmt.executeUpdate() > 0;
-        }
-    }
+//    @Override
+//    public boolean saveBatch(List<OrderDetail> orderDetails) throws SQLException {
+//        String sql = "INSERT INTO order_details (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
+//        try (Connection conn = DBConnection.getConnection();
+//             PreparedStatement stmt = conn.prepareStatement(sql)) {
+//            conn.setAutoCommit(false);
+//
+//            for (OrderDetail detail : orderDetails) {
+//                stmt.setInt(1, detail.getOrderId());
+//                stmt.setInt(2, detail.getProductId());
+//                stmt.setInt(3, detail.getQuantity());
+//                stmt.setBigDecimal(4, detail.getPrice());
+//                stmt.addBatch();
+//            }
+//
+//            int[] results = stmt.executeBatch();
+//            conn.commit();
+//
+//            for (int result : results) {
+//                if (result == 0) return false;
+//            }
+//            return true;
+//        } catch (SQLException e) {
+//            throw e;
+//        }
+//    }
+//
+//    @Override
+//    public boolean deleteByOrderId(int orderId) throws SQLException {
+//        String sql = "DELETE FROM order_details WHERE order_id = ?";
+//        try (Connection conn = DBConnection.getConnection();
+//             PreparedStatement stmt = conn.prepareStatement(sql)) {
+//            stmt.setInt(1, orderId);
+//            return stmt.executeUpdate() > 0;
+//        }
+//    }
 
     private OrderDetail mapResultSetToOrderDetail(ResultSet rs) throws SQLException {
         OrderDetail detail = new OrderDetail();

@@ -14,7 +14,8 @@ public class ProductDAOImpl implements ProductDAO {
     public List<Product> findAll() throws SQLException {
         List<Product> products = new ArrayList<>();
         String sql = "SELECT p.*, c.name as category_name FROM products p " +
-                "LEFT JOIN categories c ON p.category_id = c.id ORDER BY p.id";
+                     "LEFT JOIN categories c ON p.category_id = c.id " +
+                     "WHERE p.is_deleted = false ORDER BY p.id";
         try (Connection conn = DBConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -45,7 +46,8 @@ public class ProductDAOImpl implements ProductDAO {
     public List<Product> searchByName(String keyword) throws SQLException {
         List<Product> products = new ArrayList<>();
         String sql = "SELECT p.*, c.name as category_name FROM products p " +
-                "LEFT JOIN categories c ON p.category_id = c.id WHERE p.name LIKE ?";
+                     "LEFT JOIN categories c ON p.category_id = c.id " +
+                     "WHERE p.name LIKE ? AND p.is_deleted = false";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, "%" + keyword + "%");
@@ -60,7 +62,8 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public Product findById(int id) throws SQLException {
         String sql = "SELECT p.*, c.name as category_name FROM products p " +
-                "LEFT JOIN categories c ON p.category_id = c.id WHERE p.id = ?";
+                     "LEFT JOIN categories c ON p.category_id = c.id " +
+                     "WHERE p.id = ? AND p.is_deleted = false";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -120,7 +123,7 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public boolean delete(int id) throws SQLException {
-        String sql = "DELETE FROM products WHERE id = ?";
+        String sql = "UPDATE products SET is_deleted = true WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -153,5 +156,155 @@ public class ProductDAOImpl implements ProductDAO {
         product.setCategoryId(rs.getInt("category_id"));
         product.setCategoryName(rs.getString("category_name"));
         return product;
+    }
+
+    @Override
+    public List<Product> findAllSortedByPrice(String order) throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String sortOrder = order.equalsIgnoreCase("DESC") ? "DESC" : "ASC";
+        String sql = "SELECT p.*, c.name as category_name FROM products p " +
+                "LEFT JOIN categories c ON p.category_id = c.id " +
+                "WHERE p.is_deleted = false ORDER BY p.price " + sortOrder;
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                products.add(mapResultSetToProduct(rs));
+            }
+        }
+        return products;
+    }
+
+    @Override
+    public List<Product> findByCategorySortedByPrice(int categoryId, String order) throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String sortOrder = order.equalsIgnoreCase("DESC") ? "DESC" : "ASC";
+        String sql = "SELECT p.*, c.name as category_name FROM products p " +
+                "LEFT JOIN categories c ON p.category_id = c.id " +
+                "WHERE p.category_id = ? AND p.is_deleted = false ORDER BY p.price " + sortOrder;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, categoryId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                products.add(mapResultSetToProduct(rs));
+            }
+        }
+        return products;
+    }
+
+    @Override
+    public List<Product> searchByNameSortedByPrice(String keyword, String order) throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String sortOrder = order.equalsIgnoreCase("DESC") ? "DESC" : "ASC";
+        String sql = "SELECT p.*, c.name as category_name FROM products p " +
+                "LEFT JOIN categories c ON p.category_id = c.id " +
+                "WHERE p.name LIKE ? AND p.is_deleted = false ORDER BY p.price " + sortOrder;
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + keyword + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                products.add(mapResultSetToProduct(rs));
+            }
+        }
+        return products;
+    }
+
+    @Override
+    public List<Product> findAll(int offset, int limit) throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT p.*, c.name as category_name FROM products p " +
+                "LEFT JOIN categories c ON p.category_id = c.id " +
+                "WHERE p.is_deleted = false ORDER BY p.id LIMIT ? OFFSET ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, limit);
+            stmt.setInt(2, offset);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                products.add(mapResultSetToProduct(rs));
+            }
+        }
+        return products;
+    }
+
+    @Override
+    public int getTotalCount() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM products WHERE is_deleted = false";
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public List<Product> searchByName(String keyword, int offset, int limit) throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT p.*, c.name as category_name FROM products p " +
+                "LEFT JOIN categories c ON p.category_id = c.id " +
+                "WHERE p.name LIKE ? AND p.is_deleted = false ORDER BY p.id LIMIT ? OFFSET ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + keyword + "%");
+            stmt.setInt(2, limit);
+            stmt.setInt(3, offset);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                products.add(mapResultSetToProduct(rs));
+            }
+        }
+        return products;
+    }
+
+    @Override
+    public int getSearchCount(String keyword) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM products WHERE name LIKE ? AND is_deleted = false";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + keyword + "%");
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public List<Product> findInStock() throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT p.*, c.name as category_name FROM products p " +
+                "LEFT JOIN categories c ON p.category_id = c.id " +
+                "WHERE p.is_deleted = false AND p.stock > 0 ORDER BY p.id";
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                products.add(mapResultSetToProduct(rs));
+            }
+        }
+        return products;
+    }
+
+    @Override
+    public List<Product> findInStockSortedByPrice(String order) throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String sortOrder = order.equalsIgnoreCase("DESC") ? "DESC" : "ASC";
+        String sql = "SELECT p.*, c.name as category_name FROM products p " +
+                "LEFT JOIN categories c ON p.category_id = c.id " +
+                "WHERE p.is_deleted = false AND p.stock > 0 ORDER BY p.price " + sortOrder;
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                products.add(mapResultSetToProduct(rs));
+            }
+        }
+        return products;
     }
 }

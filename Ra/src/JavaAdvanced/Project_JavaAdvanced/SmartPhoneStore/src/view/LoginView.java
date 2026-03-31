@@ -13,37 +13,45 @@ public class LoginView {
     }
 
     public User showLogin() {
-        System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-        System.out.println("|                                                         PAGE : LOGIN                                                      |");
-        System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-        System.out.println("┃                              ┃                              ┃                              ┃                              ┃");
-        System.out.println("┃         1. Login             ┃         2. Register          ┃      3. Forget password      ┃           4 . EXIT           |");
-        System.out.println("┃                              ┃                              ┃                              ┃                              ┃");
-        System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-
+        System.out.println("""
+            ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+            |                                                         Page : Login                                                      |
+            ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+            ┃                              ┃                              ┃                              ┃                              ┃
+            ┃         1. Login             ┃         2. Register          ┃      3. Forget Password      ┃           4 . Exit           |
+            ┃                              ┃                              ┃                              ┃                              ┃
+            ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+        """);
         int choice = Console.inputInt("Lua chon cua ban: ");
 
         switch (choice) {
-            case 1:
-//                return doLogin();
+            case 1 -> {
                 User user = doLogin();
                 if (user != null) {
                     return user;
                 }
-                break;
-            case 2:
+            }
+
+            case 2 -> {
                 RegisterView registerView = new RegisterView();
                 registerView.showRegister();
                 return null;
-            case 3:
+            }
+
+            case 3 -> {
                 ForgetPasswordView forgetView = new ForgetPasswordView();
                 forgetView.showForgetPassword();
                 return null;
-            case 4:
+            }
+
+            case 4 -> {
                 return null;
-            default:
+            }
+
+            default -> {
                 Console.printError("Enter choice from 1 to 4 !");
                 return null;
+            }
         }
         return null;
         //C:\Users\TDG\Desktop\Java\SmartPhoneStore\src\view\LoginView.java:48:5

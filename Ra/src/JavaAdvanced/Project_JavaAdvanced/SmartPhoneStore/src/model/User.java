@@ -46,15 +46,15 @@ public class User {
     public boolean isActive() { return isActive; }
     public void setActive(boolean active) { isActive = active; }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", role='" + role + '\'' +
-                ", isActive=" + isActive +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "id=" + id +
+//                ", fullName='" + fullName + '\'' +
+//                ", email='" + email + '\'' +
+//                ", phone='" + phone + '\'' +
+//                ", role='" + role + '\'' +
+//                ", isActive=" + isActive +
+//                '}';
+//    }
 }

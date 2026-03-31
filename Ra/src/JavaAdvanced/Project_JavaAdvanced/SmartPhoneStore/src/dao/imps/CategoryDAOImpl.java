@@ -12,7 +12,7 @@ public class CategoryDAOImpl implements CategoryDAO {
     @Override
     public List<Category> findAll() throws SQLException {
         List<Category> categories = new ArrayList<>();
-        String sql = "SELECT id, name, description FROM categories ORDER BY id";
+        String sql = "SELECT id, name, description FROM categories WHERE is_deleted = false ORDER BY id";
         try (Connection conn = DBConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -39,7 +39,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
     @Override
     public Category findByName(String name) throws SQLException {
-        String sql = "SELECT id, name, description FROM categories WHERE name = ?";
+        String sql = "SELECT id, name, description FROM categories WHERE name = ? AND is_deleted = false";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, name);
@@ -84,7 +84,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
     @Override
     public boolean delete(int id) throws SQLException {
-        String sql = "DELETE FROM categories WHERE id = ?";
+        String sql = "UPDATE categories SET is_deleted = true WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);

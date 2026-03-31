@@ -11,5 +11,4 @@ public interface UserDAO {
     boolean update(User user) throws SQLException;
     boolean delete(int id) throws SQLException;
     List<User> findAll() throws SQLException;
-    List<User> findByRole(String role) throws SQLException;
 }

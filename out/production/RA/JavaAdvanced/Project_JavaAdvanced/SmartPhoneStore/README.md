@@ -1,108 +1,266 @@
-#### 1.
-users: chứa thông tin tài khoản, bao gồm cả admin và customer, phân quyền qua role. Lưu thông tin họ tên, email, số điện thoại, địa chỉ, mật khẩu mã hóa.
-categories: danh mục sản phẩm (iPhone, Samsung, Xiaomi...)
-products: sản phẩm điện thoại, với các thuộc tính: tên, hãng, dung lượng, màu sắc, giá, số lượng tồn kho, mô tả, danh mục.
-flash_sales: (nâng cao) lưu thông tin sản phẩm tham gia flash sale: giá flash, số lượng flash, thời gian bắt đầu/kết thúc.
-coupons: (nâng cao) mã giảm giá: code, % giảm, hạn sử dụng, số lượng tối đa sử dụng, điều kiện đơn hàng tối thiểu.
-orders: đơn hàng: user_id, ngày tạo, tổng tiền, trạng thái, địa chỉ giao hàng, số điện thoại, mã coupon đã áp dụng (nếu có).
-order_details: chi tiết đơn hàng: order_id, product_id, số lượng, giá tại thời điểm mua (giá gốc hoặc giá flash đã áp dụng).
-order_status_log: (tùy chọn) ghi lại lịch sử thay đổi trạng thái đơn hàng (theo yêu cầu có thể thêm để theo dõi).
+```markdown
+# SmartPhoneStore - Hệ thống quản lý bán điện thoại
 
+## Giới thiệu
 
+SmartPhoneStore là ứng dụng quản lý bán điện thoại được viết bằng Java thuần túy (Core Java) với giao diện console. Hệ thống hỗ trợ đầy đủ các chức năng cho hai đối tượng người dùng: Admin và Customer.
 
+### Mục tiêu dự án
+- Xây dựng hệ thống quản lý bán hàng hoàn chỉnh
+- Áp dụng các kỹ thuật lập trình Java: OOP, JDBC, Transaction, Exception Handling
+- Đảm bảo an toàn dữ liệu với PreparedStatement và BCrypt
+- Tối ưu trải nghiệm người dùng với giao diện console đẹp mắt
 
+---
 
+## Công nghệ sử dụng
 
+| Công nghệ | Phiên bản | Mục đích |
+|-----------|-----------|----------|
+| Java | 17 | Ngôn ngữ lập trình chính |
+| MySQL | 8.0+ | Cơ sở dữ liệu |
+| JDBC | - | Kết nối và thao tác với database |
+| BCrypt | - | Mã hóa mật khẩu |
 
-#### 2.
-Quản lý hàng tồn kho/Đơn hàng: 
-Khi khách hàng đặt hàng, hệ thống cần: 
-Tạo đơn hàng -> Trừ số lượng trong bảng kho -> Cập nhật trạng thái thanh toán. 
-Nếu một bước lỗi, toàn bộ đơn hàng phải hủy bỏ để tránh lệch dữ liệu kho.
+---
 
+## Cài đặt và chạy dự án
 
-# Dùng xóa mềm
-Ngày	Quy chế	Nhiệm vụ	Tiến độ	Nhận xét
-Buổi 1
-Không vi phạm
+### 1. Yêu cầu hệ thống
+- Java JDK 17 trở lên
+- MySQL Server 8.0 trở lên
+- IDE (IntelliJ IDEA, Eclipse, hoặc NetBeans) hoặc Terminal
 
-Ngày 1: Thiết lập cấu trúc & Quản lý danh mục (Foundation)
+### 2. Cài đặt Database
 
-Xây dựng Database MySQL: Tạo các bảng users, categories, products, orders, order_details.
+**Bước 1:** Tạo database
+```sql
+CREATE DATABASE smartphone_store;
+USE smartphone_store;
+```
 
-Thiết lập cấu trúc Project Java theo mô hình 4 lớp: model, dao, service, presentation, util.
+**Bước 2:** Chạy file script `sql/db.sql` để tạo bảng và dữ liệu mẫu
 
-Hoàn thành lớp kết nối MyDatabase và các thực thể (Entity).
+Hoặc copy nội dung file `db.sql` và chạy trực tiếp trong MySQL Workbench.
 
-Thực hiện trọn gói chức năng Quản lý Danh mục (Category): Xem, Thêm, Sửa, Xóa (Admin).
+### 3. Cấu hình kết nối
+Mở file `util/DBConnection.java` và sửa thông tin kết nối:
 
-Mục tiêu: Thông suốt kết nối DB và hiểu luồng CRUD cơ bản.
+```java
+private static final String URL = "jdbc:mysql://localhost:3306/smartphone_store";
+private static final String USER = "root";           // Tên đăng nhập MySQL
+private static final String PASSWORD = "your_password"; // Mật khẩu MySQL
+```
 
-Đã hoàn thành
-hoàn thành
-Buổi 2
-Không vi phạm
+### 4. Chạy ứng dụng
 
-Ngày 2: Quản lý Sản phẩm & Xác thực (Inventory & Auth)
+#### Cách 1: Chạy bằng IDE
+- Mở project trong IntelliJ/Eclipse/NetBeans
+- Chạy file `Main.java`
 
-Thực hiện trọn gói chức năng Quản lý Sản phẩm (Product): Admin có thể Thêm, Sửa, Xóa, Tìm kiếm điện thoại (Validate giá, số lượng kho).
+#### Cách 2: Chạy bằng terminal
 
-Xây dựng chức năng Đăng ký/Đăng nhập:
+```bash
+# Biên dịch
+javac -d out -cp lib/mysql-connector-java-8.0.33.jar src/**/*.java
 
-Mã hóa mật khẩu bằng BCrypt.
+# Chạy (Windows)
+java -cp out;lib/mysql-connector-java-8.0.33.jar Main
 
-Phân quyền Menu dựa trên Role (Admin thấy menu quản lý, Customer thấy menu mua sắm).
+# Chạy (Linux/Mac)
+java -cp out:lib/mysql-connector-java-8.0.33.jar Main
+```
 
-Mục tiêu: Hoàn thiện kho hàng và hệ thống bảo mật người dùng.
+**Lưu ý:** Chạy với UTF-8 để hiển thị tốt hơn:
+```bash
+java -Dfile.encoding=UTF-8 -cp out:lib/mysql-connector-java-8.0.33.jar Main
+```
 
-Đã hoàn thành
-hoàn thành
-Buổi 3
-Không vi phạm
+--- 
 
-Ngày 3: Nghiệp vụ Mua hàng & Giỏ hàng (Shopping Workflow)
+    SmartPhoneStore/
+        └── src/
+            |── Main.java                                      # Điểm khởi chạy ứng dụng
+            ├── dao/                                           # Data Access Object Layer
+            │   ├── interfaces/                                # Interface cho các DAO
+            │   │   ├── CategoryDAO.java
+            │   │   ├── CouponDAO.java
+            │   │   ├── CouponProductDAO.java
+            │   │   ├── FlashSaleDAO.java
+            │   │   ├── OrderDAO.java
+            │   │   ├── OrderDetailDAO.java
+            │   │   ├── ProductDAO.java
+            │   │   └── UserDAO.java
+            │   │
+            │   └── imps/                                      # Implementation của các DAO
+            │       ├── CategoryDAOImpl.java
+            │       ├── CouponDAOImpl.java
+            │       ├── CouponProductDAOImpl.java
+            │       ├── FlashSaleDAOImpl.java
+            │       ├── OrderDAOImpl.java
+            │       ├── OrderDetailDAOImpl.java
+            │       ├── ProductDAOImpl.java
+            │       └── UserDAOImpl.java
+            
+            ├── model/                                         # Entity classes (DTO)
+            │   ├── Category.java
+            │   ├── Coupon.java
+            │   ├── FlashSale.java
+            │   ├── Order.java
+            │   ├── OrderDetail.java
+            │   ├── Product.java
+            │   └── User.java
+            
+            ├── service/                                       # Business Logic Layer
+            │   ├── AuthService.java                           # Xác thực người dùng
+            │   ├── CartService.java                           # Quản lý giỏ hàng
+            │   ├── CategoryService.java                       # Quản lý danh mục
+            │   ├── CouponService.java                         # Quản lý mã giảm giá
+            │   ├── FlashSaleService.java                      # Quản lý flash sale
+            │   ├── OrderService.java                          # Quản lý đơn hàng
+            │   ├── ProductService.java                        # Quản lý sản phẩm
+            │   └── ReportService.java                         # Thống kê báo cáo
+            
+            ├── view/                                          # Presentation Layer (UI)
+            │   ├── AdminView.java                             # Giao diện Admin
+            │   ├── CustomerView.java                          # Giao diện Customer
+            │   ├── LoginView.java                             # Đăng nhập
+            │   ├── RegisterView.java                          # Đăng ký
+            │   ├── ForgetPasswordView.java                    # Quên mật khẩu
+            │   └── Home.java                                  # Màn hình chính
+            
+            ├── util/                                          # Tiện ích
+            │   ├── BCrypt.java                                # Mã hóa mật khẩu
+            │   ├── Color.java                                 # Màu sắc console
+            │   ├── Console.java                               # Nhập/xuất console
+            │   ├── DBConnection.java                          # Kết nối database
+            │   ├── Validator.java                             # Validation dữ liệu
+            │   └── IMethod.java                               # (Có thể xóa - không dùng)
+            
+            ├── exception/                                     # Custom exceptions
+            │   ├── CouponExpiredException.java
+            │   ├── DataAccessException.java
+            │   ├── InsufficientStockException.java
+            │   └── InvalidInputException.java
+            
+            └── sql/                                           # Script database
+                └── db.sql                                     # Tạo bảng và dữ liệu mẫu
+njfn
 
-Hiển thị danh sách sản phẩm cho Customer (Lọc theo hãng, theo giá).
+## Tài khoản mặc định
 
-Xây dựng logic Đặt hàng:
+| Vai trò     | Email                    | Mật khẩu   |
+|-------------|--------------------------|------------|
+| **Admin**   | admin@smartphone.com     | admin123   |
+| **Customer**| nguyenvana@email.com     | 123456     |
 
-Kiểm tra tồn kho trước khi tạo đơn.
+Có thể đăng ký tài khoản Customer mới từ menu đăng nhập.
 
-Sử dụng Transaction để đồng thời lưu Đơn hàng (Orders), Chi tiết đơn (OrderDetails) và trừ số lượng sản phẩm trong kho.
+---
 
-Mục tiêu: Đây là ngày quan trọng nhất, đảm bảo tính toàn vẹn dữ liệu khi mua bán.
+## Chức năng chi tiết
 
-Đang xử lý
-Chưa có nhận xét
-Buổi 4
-Không vi phạm
+### Admin
 
-Ngày 4: Quản lý Đơn hàng & Lịch sử (Order Management)
+| STT | Chức năng                    | Mô tả |
+|-----|------------------------------|-------|
+| 1   | Quản lý danh mục             | Thêm, sửa, xóa, xem danh sách hãng điện thoại |
+| 2   | Quản lý sản phẩm             | CRUD sản phẩm, tìm kiếm, sắp xếp theo giá, phân trang |
+| 3   | Quản lý đơn hàng             | Xem tất cả đơn hàng, cập nhật trạng thái (Pending → Shipping → Delivered) |
+| 4   | Thống kê & báo cáo           | Doanh thu, top 5 sản phẩm bán chạy (theo tháng), thống kê đơn hàng |
+| 5   | Quản lý khách hàng           | Xem danh sách khách hàng (đang phát triển) |
+| 6   | Cập nhật thông tin cá nhân   | Thay đổi thông tin admin |
 
-Admin: Xem danh sách đơn hàng toàn hệ thống, cập nhật trạng thái đơn (Duyệt/Giao hàng/Hủy).
+### Customer
 
-Customer: Xem lịch sử đơn hàng cá nhân và theo dõi tiến độ xử lý đơn.
+| STT | Chức năng              | Mô tả |
+|-----|------------------------|-------|
+| 1   | Xem danh sách sản phẩm | Chỉ hiển thị sản phẩm còn hàng, có sắp xếp theo giá |
+| 2   | Tìm kiếm sản phẩm      | Tìm kiếm tương đối theo tên sản phẩm |
+| 3   | Quản lý giỏ hàng       | Thêm, sửa số lượng, xóa sản phẩm |
+| 4   | Đặt hàng               | Xác nhận đơn hàng, áp dụng mã giảm giá, tự động trừ tồn kho |
+| 5   | Lịch sử đơn hàng       | Xem danh sách đơn hàng đã đặt, chi tiết từng đơn |
+| 6   | Flash Sale             | Xem và mua sản phẩm giảm giá theo khung giờ |
+| 7   | Mã giảm giá            | Xem danh sách mã giảm giá đang có hiệu lực |
+| 8   | Thông tin cá nhân      | Cập nhật thông tin, đổi mật khẩu |
 
-Hoàn thiện các chức năng tìm kiếm nâng cao và sắp xếp sản phẩm theo giá.
+---
 
-Mục tiêu: Kết thúc toàn bộ các tính năng bắt buộc trong SRS.
+## Tính năng bảo mật
 
-Đang xử lý
-Chưa có nhận xét
-Buổi 5
-Không vi phạm
+| Tính năng                | Mô tả |
+|--------------------------|-------|
+| Mã hóa mật khẩu          | Sử dụng BCrypt, không lưu mật khẩu dạng plain text |
+| Chống SQL Injection      | Sử dụng 100% PreparedStatement, không ghép chuỗi SQL |
+| Phân quyền               | Admin và Customer có menu riêng biệt |
+| Transaction              | Đặt hàng được bọc trong transaction, đảm bảo toàn vẹn dữ liệu |
 
-Ngày 5: Kiểm thử (Testing) & Hoàn thiện (Polishing)
+---
 
-Unit Test: Kiểm tra các trường hợp nhập liệu sai (Validation): Số điện thoại sai định dạng, nhập chữ vào ô giá tiền, đặt hàng khi kho bằng 0.
+## Validation đã được kiểm tra
 
-Security Test: Thử tấn công SQL Injection (như ví dụ thầy dạy) để đảm bảo PreparedStatement đã chặn đứng các chuỗi độc hại.
+| Trường hợp                        | Xử lý |
+|-----------------------------------|-------|
+| Email sai định dạng               | Bắt lỗi, yêu cầu nhập lại |
+| Số điện thoại sai định dạng       | Kiểm tra regex, nhập lại |
+| Nhập chữ vào ô số (giá, số lượng) | Bắt NumberFormatException |
+| Đặt hàng khi kho = 0              | Kiểm tra tồn kho, không cho thêm vào giỏ |
+| Mã giảm giá hết hạn               | Thông báo lỗi, không áp dụng |
+| Flash sale hết số lượng           | Thông báo lỗi, không cho mua |
 
-Refactoring: Tối ưu code (Clean Code), định dạng bảng Console cho đẹp mắt, viết file README.md hướng dẫn chạy dự án.
+---
 
-Mục tiêu: Đóng gói sản phẩm chất lượng cao, không còn lỗi logic.
+## Cấu trúc bảng dữ liệu (Database Schema)
 
-: check xem đã làm đủ các task chưa
+| Bảng              | Mô tả |
+|-------------------|-------|
+| `users`           | Người dùng (admin, customer) |
+| `categories`      | Danh mục sản phẩm (Apple, Samsung, Xiaomi...) |
+| `products`        | Sản phẩm điện thoại |
+| `orders`          | Đơn hàng |
+| `order_details`   | Chi tiết đơn hàng |
+| `coupons`         | Mã giảm giá |
+| `coupon_products` | Sản phẩm áp dụng mã giảm giá |
+| `coupon_brands`   | Hãng áp dụng mã giảm giá |
+| `flash_sales`     | Chương trình flash sale |
 
+---
 
-        admin@gmail.com
+## Lưu ý khi chạy
+
+1. **MySQL phải đang chạy** trước khi khởi động ứng dụng
+2. Đảm bảo **JDBC driver** (`mysql-connector-java-8.0.33.jar`) đã được thêm vào classpath
+3. Nếu gặp lỗi kết nối, kiểm tra lại `USER` và `PASSWORD` trong `DBConnection.java`
+4. Dữ liệu mẫu đã được insert sẵn qua file `db.sql`
+
+---
+
+## Xử lý lỗi thường gặp
+
+| Lỗi                              | Nguyên nhân                          | Cách khắc phục |
+|----------------------------------|--------------------------------------|----------------|
+| `ClassNotFoundException`         | Thiếu JDBC driver                    | Thêm file `mysql-connector-java-8.0.33.jar` vào classpath |
+| `SQLException: Access denied`    | Sai tài khoản MySQL                  | Kiểm tra lại USER và PASSWORD |
+| `SQLException: Unknown database` | Database chưa được tạo               | Tạo database `smartphone_store` |
+| Lỗi font chữ console             | Encoding không đúng                  | Chạy với `-Dfile.encoding=UTF-8` |
+
+---
+
+## Tác giả
+
+| Họ tên       | Vai trò    |
+|--------------|------------|
+| [Your Name]  | Developer  |
+
+---
+
+## License
+
+Dự án được phát triển cho mục đích học tập.
+
+---
+
+**Chúc bạn sử dụng ứng dụng thành công!**
+```
+
+Bạn chỉ cần copy toàn bộ nội dung trên và dán vào file `README.md` là xong. Đã được viết lại sạch sẽ, chuyên nghiệp và không có icon emoji như yêu cầu.

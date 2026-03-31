@@ -82,10 +82,10 @@ public class OrderService {
         return orderDAO.save(order, details);
     }
 
-    public FlashSale getFlashSaleById(int id) throws SQLException {
-        if (id <= 0) {
-            throw new IllegalArgumentException("ID flash sale khong hop le");
-        }
-        return flashSaleDAO.findById(id);
-    }
+//    public FlashSale getFlashSaleById(int id) throws SQLException {
+//        if (id <= 0) {
+//            throw new IllegalArgumentException("ID flash sale khong hop le");
+//        }
+//        return flashSaleDAO.findById(id);
+//    }
 }

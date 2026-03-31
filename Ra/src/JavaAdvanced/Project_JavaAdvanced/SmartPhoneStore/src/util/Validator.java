@@ -3,18 +3,14 @@ package JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.util;
 import java.util.regex.Pattern;
 
 public class Validator {
-
-    private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@(.+)$";
-    private static final String PHONE_REGEX = "^(0[3|5|7|8|9])+([0-9]{8})$";
-
     public static boolean isValidEmail(String email) {
         if (email == null || email.trim().isEmpty()) return false;
-        return Pattern.matches(EMAIL_REGEX, email);
+        return Pattern.matches("^[A-Za-z0-9+_.-]+@(.+)$", email);
     }
 
     public static boolean isValidPhone(String phone) {
         if (phone == null || phone.trim().isEmpty()) return false;
-        return Pattern.matches(PHONE_REGEX, phone);
+        return Pattern.matches("^(0[3|5|7|8|9])+([0-9]{8})$", phone);
     }
 
     public static boolean isStrongPassword(String password) {
@@ -27,9 +23,5 @@ public class Validator {
 
     public static boolean isValidStock(int stock) {
         return stock >= 0;
-    }
-
-    public static boolean isValidQuantity(int quantity) {
-        return quantity > 0;
     }
 }

@@ -81,6 +81,23 @@ use smartphone_store;
 --     index idx_valid (valid_from, valid_to)
 -- );
 --
+create table coupon_products (
+    id int primary key auto_increment,
+    coupon_id int not null,
+    product_id int not null,
+    foreign key (coupon_id) references coupons(id) on delete cascade,
+    foreign key (product_id) references products(id) on delete cascade,
+    unique key unique_coupon_product (coupon_id, product_id)
+);
+
+create table coupon_brands (
+    id int primary key auto_increment,
+    coupon_id int not null,
+    brand varchar(100) not null,
+    foreign key (coupon_id) references coupons(id) on delete cascade,
+    unique key unique_coupon_brand (coupon_id, brand)
+);
+
 -- create table flash_sales (
 --     id int primary key auto_increment,
 --     product_id int not null,
@@ -142,5 +159,10 @@ use smartphone_store;
 --     (1, 1, 1, 29990000.00),
 --     (2, 3, 1, 28490000.00),
 --     (3, 6, 1, 6990000.00);
-ALTER TABLE categories ADD COLUMN is_deleted BOOLEAN DEFAULT FALSE;
-ALTER TABLE categories ADD INDEX idx_is_deleted (is_deleted);
+alter table categories add column is_deleted boolean default false;
+alter table categories add index idx_is_deleted (is_deleted);
+
+alter table products add column is_deleted boolean default false;
+alter table products add index idx_is_deleted (is_deleted);
+
+alter table coupons add column applicable_type varchar(20) default 'ALL';

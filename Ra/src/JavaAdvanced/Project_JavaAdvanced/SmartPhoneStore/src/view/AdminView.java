@@ -5,6 +5,7 @@ import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Category;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Product;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.Order;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.model.OrderDetail;
+import static JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.util.Console.getStatusText;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service.CategoryService;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service.ProductService;
 import JavaAdvanced.Project_JavaAdvanced.SmartPhoneStore.src.service.OrderService;
@@ -62,17 +63,19 @@ public class AdminView {
 
     private void manageCategories() {
         while (true) {
-            System.out.println("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-            System.out.println("|                               QUAN LY DANH MUC                            |");
-            System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-            System.out.println("┃                                                                           ┃");
-            System.out.println("┃    1. THEM DANH MUC MOI                                                   ┃");
-            System.out.println("┃    2. SUA DANH MUC                                                        ┃");
-            System.out.println("┃    3. XOA DANH MUC                                                        ┃");
-            System.out.println("┃    4. XEM DANH SACH DANH MUC                                              ┃");
-            System.out.println("┃    0. QUAY LAI                                                            ┃");
-            System.out.println("┃                                                                           ┃");
-            System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+            System.out.println("""
+                ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+                |                               Quan Ly Danh Muc                            |
+                ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+                ┃                                                                           ┃
+                ┃    1. Them Danh Muc Moi                                                   ┃
+                ┃    2. Sua Danh Muc                                                        ┃
+                ┃    3. Xoa Danh Muc                                                        ┃
+                ┃    4. Xem Danh Sach Danh Muc                                              ┃
+                ┃    0. Quay Lai                                                            ┃
+                ┃                                                                           ┃
+                ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+            """);
 
             int choice = Console.inputInt("Lua chon cua ban: ");
 
@@ -187,6 +190,7 @@ public class AdminView {
                 ┃    3. Xoa San Pham                                                       ┃
                 ┃    4. Xem Tat Ca San Pham                                                ┃
                 ┃    5. Tim Kiem San Pham                                                  ┃
+                ┃    6. Sap Xep Theo Gia                                                   ┃
                 ┃    0. Quay Lai                                                           ┃
                 ┃                                                                          ┃
                 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
@@ -201,6 +205,7 @@ public class AdminView {
                     case 3 -> deleteProduct();
                     case 4 -> viewAllProducts();
                     case 5 -> searchProducts();
+                    case 6 -> sortProducts();
                     case 0 -> {
                         return;
                     }
@@ -259,27 +264,23 @@ public class AdminView {
         System.out.println("Mo ta: " + product.getDescription());
         System.out.println("Danh muc ID: " + product.getCategoryId());
         Console.printSeparator();
-//        System.out.println();
 
-        String name = Console.inputString("Ten moi (bo trong neu khong doi): ");
-        String brand = Console.inputString("Hang moi (bo trong neu khong doi): ");
-//        String capacity = Console.inputString("Dung luong moi (bo trong neu khong doi): ");
-        String capacityStr = Console.inputString("Dung luong moi (bo trong neu khong doi): ");
+        //bo trong neu khong doi
+        String name = Console.inputString("Ten moi : ");
+        String brand = Console.inputString("Hang moi: ");
+        String capacityStr = Console.inputString("Dung luong moi: ");
 
 
-        String color = Console.inputString("Mau moi (bo trong neu khong doi): ");
-        String priceStr = Console.inputString("Gia moi (bo trong neu khong doi): ");
-        String stockStr = Console.inputString("Ton kho moi (bo trong neu khong doi): ");
-        String description = Console.inputString("Mo ta moi (bo trong neu khong doi): ");
-        String categoryIdStr = Console.inputString("ID danh muc moi (bo trong neu khong doi): ");
+        String color = Console.inputString("Mau moi: ");
+        String priceStr = Console.inputString("Gia moi: ");
+        String stockStr = Console.inputString("Ton kho moi: ");
+        String description = Console.inputString("Mo ta moi: ");
+        String categoryIdStr = Console.inputString("ID danh muc moi: ");
 
         if (name.isEmpty()) name = product.getName();
         if (brand.isEmpty()) brand = product.getBrand();
-//        if (capacity.isEmpty()) capacity = product.getCapacity();
-        // Xử lý capacity
-        String capacity = capacityStr.isEmpty()
-                ? product.getCapacity()
-                : parseCapacity(capacityStr, product.getCapacity());
+        //if (capacity.isEmpty()) capacity = product.getCapacity();
+        String capacity = capacityStr.isEmpty() ? product.getCapacity() : parseCapacity(capacityStr, product.getCapacity());
         if (color.isEmpty()) color = product.getColor();
         double price = priceStr.isEmpty() ? product.getPrice().doubleValue() : Double.parseDouble(priceStr);
         int stock = stockStr.isEmpty() ? product.getStock() : Integer.parseInt(stockStr);
@@ -301,52 +302,150 @@ public class AdminView {
 
         int id = Console.inputInt("Nhap ID san pham: ");
 
-        if (productService.deleteProduct(id)) {
-            Console.printSuccess("Xoa san pham thanh cong !!");
+        Product product = productService.getProductById(id);
+        if (product == null) {
+            Console.printError("Khong tim thay san pham !!");
+            return;
+        }
+
+        boolean confirm = Console.inputBoolean("Ban co chac chan muon xoa san pham nay? (y/n): ");
+        if (confirm) {
+            if (productService.deleteProduct(id)) {
+                Console.printSuccess("Xoa san pham thanh cong !!");
+            } else {
+                Console.printError("Xoa san pham that bai !!");
+            }
+        } else {
+            Console.printInfo("Da huy xoa san pham");
+        }
+    }
+/// //
+    private void viewAllProducts() throws SQLException {
+        int currentPage = 1;
+        int totalPages = productService.getTotalPages();
+
+        while (true) {
+            List<Product> products = productService.getProductsByPage(currentPage);
+
+            if (products.isEmpty()) {
+                Console.printInfo("Chua co san pham nao !!");
+                return;
+            }
+
+            System.out.println("┌─── Danh sach san pham (Trang " + currentPage + "/" + totalPages + ") ────┐");
+            System.out.println("┌────┬──────────────────────────────┬──────────────────────┬──────────┬──────────────┬──────────────────────┬──────────────┐");
+            System.out.printf("│ %-4s │ %-28s │ %-20s │ %-8s │ %-12s │ %-20s │ %-12s │\n", "ID", "Ten San Pham", "Hang", "Dung Luong", "Mau Sac", "Gia", "Ton Kho");
+            System.out.println("├────┼──────────────────────────────┼──────────────────────┼──────────┼──────────────┼──────────────────────┼──────────────┤");
+
+            for (Product p : products) {
+                String nameDisplay = p.getName().length() > 25 ? p.getName().substring(0, 22) + "..." : p.getName();
+                String capacityDisplay = p.getCapacity() != null ? p.getCapacity() : "N/A";
+                String colorDisplay = p.getColor() != null ? p.getColor() : "N/A";
+
+                System.out.printf("│ %-4s │ %-28s │ %-20s │ %-8s │ %-12s │ %-20s │ %-12d │\n", p.getId(), nameDisplay, p.getBrand(), capacityDisplay, colorDisplay, p.getPrice() + " VND", p.getStock());
+            }
+            System.out.println("└────┴──────────────────────────────┴──────────────────────┴──────────┴──────────────┴──────────────────────┴──────────────┘");
+
+            System.out.println("\n┌─────────────────────────────────────────────┐");
+            System.out.println("│ 1. Trang truoc | 2. Trang sau | 0. Thoat  │");
+            System.out.println("└─────────────────────────────────────────────┘");
+
+            int choice = Console.inputInt("Lua chon: ");
+
+            if (choice == 1 && currentPage > 1) {
+                currentPage--;
+            } else if (choice == 2 && currentPage < totalPages) {
+                currentPage++;
+            } else if (choice == 0) {
+                break;
+            } else {
+                Console.printError("Lua chon khong hop le");
+            }
         }
     }
 
-    private void viewAllProducts() throws SQLException {
-        List<Product> products = productService.getAllProducts();
+    private void sortProducts() throws SQLException {
+        System.out.println("1. Sap xep theo gia tang dan (a->z)");
+        System.out.println("2. Sap xep theo gia giam dan (z->a)");
+        System.out.println("0. Quay lai");
+
+        int choice = Console.inputInt("Lua chon: ");
+
+        List<Product> products;
+        if (choice == 1) {
+            products = productService.getAllProductsSortedByPrice("ASC");
+            Console.printInfo("Sap xep theo gia tang dan:");
+        } else if (choice == 2) {
+            products = productService.getAllProductsSortedByPrice("DESC");
+            Console.printInfo("Sap xep theo gia giam dan:");
+        } else {
+            return;
+        }
 
         if (products.isEmpty()) {
             Console.printInfo("Chua co san pham nao !!");
         } else {
-            System.out.println("┌─── Danh sách sản phẩm ────┐");
-            System.out.println("┌────┬──────────────────────────────┬──────────────────────┬──────────────────────┬──────────────┐");
-            System.out.printf("│ %-4s │ %-28s │ %-20s │ %-20s │ %-12s │\n", "ID", "Ten San Pham", "Hang", "Gia", "Ton Kho");
-            System.out.println("├────┼──────────────────────────────┼──────────────────────┼──────────────────────┼──────────────┤");
+            System.out.println("┌─── Danh sach san pham ────┐");
+            System.out.println("┌────┬──────────────────────────────┬──────────────────────┬──────────┬──────────────┬──────────────────────┬──────────────┐");
+            System.out.printf("│ %-4s │ %-28s │ %-20s │ %-8s │ %-12s │ %-20s │ %-12s │\n", "ID", "Ten San Pham", "Hang", "Dung Luong", "Mau Sac", "Gia", "Ton Kho");
+            System.out.println("├────┼──────────────────────────────┼──────────────────────┼──────────┼──────────────┼──────────────────────┼──────────────┤");
+
             for (Product p : products) {
-                String nameDisplay = p.getName().length() > 25
-                        ? p.getName().substring(0, 22) + "..."
-                        : p.getName();
-                System.out.printf("│ %-4s │ %-28s │ %-20s │ %-20s │ %-12d │\n", p.getId(), nameDisplay, p.getBrand(), p.getPrice() + " VND", p.getStock());
+                String nameDisplay = p.getName().length() > 25 ? p.getName().substring(0, 22) + "..." : p.getName();
+                String capacityDisplay = p.getCapacity() != null ? p.getCapacity() : "N/A";
+                String colorDisplay = p.getColor() != null ? p.getColor() : "N/A";
+
+                System.out.printf("│ %-4s │ %-28s │ %-20s │ %-8s │ %-12s │ %-20s │ %-12d │\n", p.getId(), nameDisplay, p.getBrand(), capacityDisplay, colorDisplay, p.getPrice() + " VND", p.getStock());
             }
-            System.out.println("└────┴──────────────────────────────┴──────────────────────┴──────────────────────┴──────────────┘");
+            System.out.println("└────┴──────────────────────────────┴──────────────────────┴──────────┴──────────────┴──────────────────────┴──────────────┘");
         }
-//        System.out.println();
     }
 
     private void searchProducts() throws SQLException {
         String keyword = Console.inputString("Nhap tu khoa tim kiem: ");
-        List<Product> products = productService.searchProducts(keyword);
 
-        if (products.isEmpty()) {
+        int currPage = 1;
+        int totalPages = productService.getSearchTotalPages(keyword);
+
+        if (totalPages == 0) {
             Console.printInfo("Khong tim thay san pham nao !!");
-        } else {
-            System.out.println("┌─── Tìm kiếm sản phẩm ────┐");
-            System.out.println("┌────┬──────────────────────────────┬──────────────────────┬──────────────────────┬──────────────┐");
-            System.out.printf("│ %-4s │ %-28s │ %-20s │ %-20s │ %-12s │\n", "ID", "Ten San Pham", "Hang", "Gia", "Ton Kho");
-            System.out.println("├────┼──────────────────────────────┼──────────────────────┼──────────────────────┼──────────────┤");
-            for (Product p : products) {
-                String nameDisplay = p.getName().length() > 25
-                        ? p.getName().substring(0, 22) + "..."
-                        : p.getName();
-                System.out.printf("│ %-4s │ %-28s │ %-20s │ %-20s │ %-12d │\n", p.getId(), nameDisplay, p.getBrand(), p.getPrice() + " VND", p.getStock());
-            }
-            System.out.println("└────┴──────────────────────────────┴──────────────────────┴──────────────────────┴──────────────┘");
+            return;
         }
-//        System.out.println();
+
+        while (true) {
+            List<Product> products = productService.searchProductsByPage(keyword, currPage);
+
+            System.out.println("┌─── Tìm kiếm: \"" + keyword + "\" (Trang " + currPage + "/" + totalPages + ") ────┐");
+            System.out.println("┌────┬──────────────────────────────┬──────────────────────┬──────────┬──────────────┬──────────────────────┬──────────────┐");
+            System.out.printf("│ %-4s │ %-28s │ %-20s │ %-8s │ %-12s │ %-20s │ %-12s │\n",
+                    "ID", "Ten San Pham", "Hang", "Dung Luong", "Mau Sac", "Gia", "Ton Kho");
+            System.out.println("├────┼──────────────────────────────┼──────────────────────┼──────────┼──────────────┼──────────────────────┼──────────────┤");
+
+            for (Product p : products) {
+                String nameDisplay = p.getName().length() > 25 ? p.getName().substring(0, 22) + "..." : p.getName();
+                String capacityDisplay = p.getCapacity() != null ? p.getCapacity() : "N/A";
+                String colorDisplay = p.getColor() != null ? p.getColor() : "N/A";
+
+                System.out.printf("│ %-4s │ %-28s │ %-20s │ %-8s │ %-12s │ %-20s │ %-12d │\n", p.getId(), nameDisplay, p.getBrand(), capacityDisplay, colorDisplay, p.getPrice() + " VND", p.getStock());
+            }
+            System.out.println("└────┴──────────────────────────────┴──────────────────────┴──────────┴──────────────┴──────────────────────┴──────────────┘");
+
+            System.out.println("\n┌─────────────────────────────────────────────┐");
+            System.out.println("│ 1. Trang truoc | 2. Trang sau | 0. Thoat  │");
+            System.out.println("└─────────────────────────────────────────────┘");
+
+            int choice = Console.inputInt("Lua chon: ");
+
+            if (choice == 1 && currPage > 1) {
+                currPage--;
+            } else if (choice == 2 && currPage < totalPages) {
+                currPage++;
+            } else if (choice == 0) {
+                break;
+            } else {
+                Console.printError("Lua chon khong hop le hoac khong con trang");
+            }
+        }
     }
 
     private void manageOrders() {
@@ -541,7 +640,7 @@ public class AdminView {
     }
 
     private void showTotalRevenue() throws SQLException {
-        System.out.println("TONG DOANH THU");
+        System.out.println("\n- - - - Tong Doanh Thu:");
 
         BigDecimal revenue = reportService.getTotalRevenue();
 
@@ -549,13 +648,17 @@ public class AdminView {
     }
 
     private void showTopProducts() throws SQLException {
+        // Lấy tháng hiện tại để hiển thị
+        java.util.Calendar now = java.util.Calendar.getInstance();
+        int currentMonth = now.get(java.util.Calendar.MONTH) + 1;
+        int currentYear = now.get(java.util.Calendar.YEAR);
 
         Map<String, Integer> topProducts = reportService.getTopSellingProducts(5);
 
         if (topProducts.isEmpty()) {
-            Console.printInfo("Chua co du lieu thong ke!");
+            Console.printInfo("Chua co du lieu thong ke cho thang " + currentMonth + "/" + currentYear + "!!");
         } else {
-            System.out.println("┌─── Top 5 sản phẩm bán chạy nhất ────┐");
+            System.out.println("┌─── Top 5 san pham ban chay nhat thang " + currentMonth + "/" + currentYear + " ────┐");
             System.out.println("┌─────┬───────────────────────────┬────────────┐");
             System.out.printf("│ %-3s │ %-25s │ %-10s │\n", "STT", "San Pham", "So Luong Da Ban");
             System.out.println("├─────┼───────────────────────────┼────────────┤");
@@ -580,21 +683,6 @@ public class AdminView {
         System.out.println("└──────────────────────┴────────────┘");
     }
 
-    private void updateProfile(User admin) {
-        System.out.println("- - - - Cập nhật thông tin cá nhân:");
-        Console.printInfo("Tinh nang dang phat trien...");
-    }
-
-    private String getStatusText(String status) {
-        return switch (status.toLowerCase()) {
-            case "pending" -> "Cho xu ly";
-            case "shipping" -> "Dang giao";
-            case "delivered" -> "Da giao";
-            case "cancelled" -> "Da huy";
-            default -> status;
-        };
-    }
-
     private String parseCapacity(String input, String defaultValue) {
         try {
             int value = Integer.parseInt(input.trim());
@@ -608,5 +696,10 @@ public class AdminView {
             Console.printError("Dung luong nhap khong hop le !!");
             return defaultValue;
         }
+    }
+
+    private void updateProfile(User admin) {
+        System.out.println("- - - - Cập nhật thông tin cá nhân:");
+        Console.printInfo("Tinh nang dang phat trien...");
     }
 }

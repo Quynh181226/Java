@@ -15,17 +15,6 @@ public class ProductService {
         this.productDAO = new ProductDAOImpl();
     }
 
-    public List<Product> getAllProducts() throws SQLException {
-        return productDAO.findAll();
-    }
-
-    public List<Product> getProductsByCategory(int categoryId) throws SQLException {
-        if (categoryId <= 0) {
-            throw new IllegalArgumentException("ID danh muc khong hop le");
-        }
-        return productDAO.findByCategory(categoryId);
-    }
-
     public List<Product> searchProducts(String keyword) throws SQLException {
         if (keyword == null || keyword.trim().isEmpty()) {
             throw new IllegalArgumentException("Tu khoa tim kiem khong duoc de trong");
@@ -40,8 +29,7 @@ public class ProductService {
         return productDAO.findById(id);
     }
 
-    public boolean addProduct(String name, String brand, String capacity, String color,
-                              double price, int stock, String description, int categoryId) throws SQLException {
+    public boolean addProduct(String name, String brand, String capacity, String color, double price, int stock, String description, int categoryId) throws SQLException {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Ten san pham khong duoc de trong");
         }
@@ -106,4 +94,68 @@ public class ProductService {
 
         return productDAO.delete(id);
     }
+
+    public List<Product> getAllProductsSortedByPrice(String order) throws SQLException {
+        if (!order.equalsIgnoreCase("ASC") && !order.equalsIgnoreCase("DESC")) {
+            throw new IllegalArgumentException("Sap xep chi chap nhan ASC hoac DESC");
+        }
+        return productDAO.findAllSortedByPrice(order);
+    }
+
+    public List<Product> getInStockProducts() throws SQLException {
+        return productDAO.findInStock();
+    }
+
+    public List<Product> getInStockProductsSortedByPrice(String order) throws SQLException {
+        if (!order.equalsIgnoreCase("ASC") && !order.equalsIgnoreCase("DESC")) {
+            throw new IllegalArgumentException("Sap xep chi chap nhan ASC hoac DESC");
+        }
+        return productDAO.findInStockSortedByPrice(order);
+    }
+
+    //Page-size=10
+    public List<Product> getProductsByPage(int page) throws SQLException {
+        int offset = (page - 1) * 10;
+        return productDAO.findAll(offset, 10);
+    }
+
+    public int getTotalPages() throws SQLException {
+        int total = productDAO.getTotalCount();
+        return (int) Math.ceil((double) total / 10);
+    }
+
+    public List<Product> searchProductsByPage(String keyword, int page) throws SQLException {
+        int offset = (page - 1) * 10;
+        return productDAO.searchByName(keyword, offset, 10);
+    }
+
+    public int getSearchTotalPages(String keyword) throws SQLException {
+        int total = productDAO.getSearchCount(keyword);
+        return (int) Math.ceil((double) total / 10);
+    }
+
+//    public List<Product> getAllProducts() throws SQLException {
+//        return productDAO.findAll();
+//    }
+//
+//    public List<Product> getProductsByCategory(int categoryId) throws SQLException {
+//        if (categoryId <= 0) {
+//            throw new IllegalArgumentException("ID danh muc khong hop le");
+//        }
+//        return productDAO.findByCategory(categoryId);
+//    }
+//
+//    public List<Product> getProductsByCategorySortedByPrice(int categoryId, String order) throws SQLException {
+//        if (categoryId <= 0) {
+//            throw new IllegalArgumentException("ID danh muc khong hop le");
+//        }
+//        return productDAO.findByCategorySortedByPrice(categoryId, order);
+//    }
+//
+//    public List<Product> searchProductsSortedByPrice(String keyword, String order) throws SQLException {
+//        if (keyword == null || keyword.trim().isEmpty()) {
+//            throw new IllegalArgumentException("Tu khoa tim kiem khong duoc de trong");
+//        }
+//        return productDAO.searchByNameSortedByPrice(keyword, order);
+//    }
 }

@@ -36,6 +36,7 @@ public class Home {
                         currUser = null;
                     }
                 }
+
                 case 2 -> {
                     LoginView l = new LoginView();
                     currUser = l.doLogin();
@@ -49,11 +50,14 @@ public class Home {
                         currUser = null;
                     }
                 }
+
                 case 3 -> new ForgetPasswordView().showForgetPassword();
+
                 case 4 -> {
                     System.out.println("Goodbye !!!");
                     return;
                 }
+
                 default -> System.err.println("Lua chon khong hop le !!");
             }
         }

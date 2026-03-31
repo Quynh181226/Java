@@ -11,16 +11,10 @@ public class ForgetPasswordView {
     public ForgetPasswordView() {
         this.authService = new AuthService();
     }
-//Pass chưa change thành công
+
     public void showForgetPassword() {
         System.out.println("Forget Password - - - - ");
         String email = Console.inputString("Enter email: ");
-//        String phone = Console.inputString("Enter phone number: ");
-
-//        if (!Validator.isValidPhone(phone)) {
-//            Console.printError("Phone number invalid !");
-//            return;
-//        }
 
         try {
             if (authService.checkUserExists(email)) {

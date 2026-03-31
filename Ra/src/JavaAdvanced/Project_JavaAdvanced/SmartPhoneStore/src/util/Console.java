@@ -36,6 +36,16 @@ public class Console {
         System.out.println(CYAN + "└────────────────────────────────────────────────────────────────────────┘" + RESET);
     }
 
+    public static String getStatusText(String status) {
+        return switch (status.toLowerCase()) {
+            case "pending" -> "Cho xu ly";
+            case "shipping" -> "Dang giao";
+            case "delivered" -> "Da giao";
+            case "cancelled" -> "Da huy";
+            default -> status;
+        };
+    }
+
     public static String inputString(String prompt, Predicate<String> validator, String errorMessage) {
         while (true) {
             System.out.print(CYAN + prompt + RESET);
@@ -56,22 +66,6 @@ public class Console {
 
     public static String inputString(String prompt) {
         return inputString(prompt, s -> true, "");
-    }
-
-    public static String inputPasswordWithConfirm() {
-        while (true) {
-            String password = inputString("Nhập mật khẩu: ",
-                    Validator::isStrongPassword,
-                    "Mật khẩu phải có ít nhất 6 ký tự!");
-
-            String confirm = inputString("Nhập lại mật khẩu: ");
-
-            if (password.equals(confirm)) {
-                return password;
-            }
-
-            printError("Mật khẩu xác nhận không khớp!");
-        }
     }
 
     public static int inputInt(String prompt) {

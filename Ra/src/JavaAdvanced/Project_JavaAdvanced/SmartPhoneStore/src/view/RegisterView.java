@@ -19,12 +19,8 @@ public class RegisterView {
 
         String fullName = Console.inputString("Enter full name: ");
 
-        // Validate email ngay khi nhập
-        String email = Console.inputString("Enter email: ",
-                Validator::isValidEmail,
-                "Email khong dung dinh dang");
+        String email = Console.inputString("Enter email: ", Validator::isValidEmail, "Email khong dung dinh dang");
 
-        // Kiểm tra email đã tồn tại
         while (true) {
             try {
                 if (authService.checkUserExists(email)) {
@@ -41,10 +37,7 @@ public class RegisterView {
             }
         }
 
-        // Nhập password + confirm password
-        String password = Console.inputString("Enter password: ",
-                Validator::isStrongPassword,
-                "Mat khau phai co it nhat 6 ky tu");
+        String password = Console.inputString("Enter password: ", Validator::isStrongPassword, "Mat khau phai co it nhat 6 ky tu");
 
         String confirmPassword = Console.inputString("Re-enter password: ");
 
@@ -63,7 +56,6 @@ public class RegisterView {
             boolean success = authService.register(fullName, email, password, confirmPassword, phone, address);
             if (success) {
                 Console.printSuccess("- - - - - Register success!!");
-//                System.out.println();
                 Console.printInfo("Please login to continue...\n");
 
                 LoginView loginView = new LoginView();
