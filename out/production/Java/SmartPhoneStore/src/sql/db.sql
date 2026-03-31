@@ -1,0 +1,145 @@
+-- create database if not exists smartphone_store;
+use smartphone_store;
+--
+-- -- create data
+-- create table users (
+--     id int primary key auto_increment,
+--     full_name varchar(100) not null,
+--     email varchar(100) not null unique,
+--     password varchar(255) not null,
+--     phone varchar(15) not null,
+--     address text,
+--     role enum('Admin', 'Customer') not null default 'Customer',
+--     is_active boolean default true,
+--     index idx_email (email),
+--     index idx_role (role)
+-- );
+--
+-- create table categories (
+--     id int primary key auto_increment,
+--     name varchar(100) not null unique,
+--     description text,
+--     index idx_name (name)
+-- );
+--
+-- create table products (
+--     id int primary key auto_increment,
+--     name varchar(200) not null,
+--     brand varchar(100) not null,
+--     capacity varchar(20),
+--     color varchar(50),
+--     price decimal(12,2) not null check (price >= 0),
+--     stock int not null default 0 check (stock >= 0),
+--     description text,
+--     category_id int,
+--     foreign key (category_id) references categories(id) on delete set null,
+--     index idx_name (name),
+--     index idx_brand (brand),
+--     index idx_price (price),
+--     index idx_category (category_id)
+-- );
+--
+-- create table orders (
+--     id int primary key auto_increment,
+--     user_id int not null,
+--     order_date timestamp default current_timestamp,
+--     total_amount decimal(12,2) not null check (total_amount >= 0),
+--     status enum('Pending', 'Shipping', 'Delivered', 'Cancelled') not null default 'Pending',
+--     shipping_address text not null,
+--     shipping_phone varchar(15) not null,
+--     coupon_code varchar(50),
+--     discount_amount decimal(12,2) default 0,
+--     foreign key (user_id) references users(id) on delete restrict,
+--     index idx_user (user_id),
+--     index idx_status (status),
+--     index idx_date (order_date)
+-- );
+--
+-- create table order_details (
+--     id int primary key auto_increment,
+--     order_id int not null,
+--     product_id int not null,
+--     quantity int not null check (quantity > 0),
+--     price decimal(12,2) not null check (price >= 0),
+--     foreign key (order_id) references orders(id) on delete cascade,
+--     foreign key (product_id) references products(id) on delete restrict,
+--     index idx_order (order_id),
+--     index idx_product (product_id)
+-- );
+--
+-- create table coupons (
+--     id int primary key auto_increment,
+--     code varchar(50) not null unique,
+--     discount_percent int not null check (discount_percent between 1 and 100),
+--     valid_from date not null,
+--     valid_to date not null,
+--     max_usage int default 1,
+--     used_count int default 0,
+--     min_order_amount decimal(12,2) default 0,
+--     is_active boolean default true,
+--     index idx_code (code),
+--     index idx_valid (valid_from, valid_to)
+-- );
+--
+-- create table flash_sales (
+--     id int primary key auto_increment,
+--     product_id int not null,
+--     flash_price decimal(12,2) not null check (flash_price >= 0),
+--     flash_quantity int not null check (flash_quantity >= 0),
+--     start_time datetime not null,
+--     end_time datetime not null,
+--     foreign key (product_id) references products(id) on delete cascade,
+--     index idx_product (product_id),
+--     index idx_time (start_time, end_time)
+-- );
+--
+-- -- insert data
+-- insert into categories (name, description)
+-- values
+--    ('IPhone', 'Dòng điện thoại Apple iPhone'),
+--    ('Samsung', 'Điện thoại Samsung Galaxy'),
+--    ('Xiaomi', 'Điện thoại Xiaomi'),
+--    ('OPPO', 'Điện thoại OPPO'),
+--    ('Vivo', 'Điện thoại Vivo');
+--
+-- -- users (password: 123456 đã hash BCrypt - bạn nên thay bằng hash thật trong code)
+# admin@gmail.com
+# insert into users (full_name, email, password, phone, address, role)
+# values
+#     ('Admin System', 'admin@smartphone.com', '$2a$10$N9qo8uLOickgx2ZMRZoMy.Mr/FMh2uY6XjMqGZqZgYzXxXxXxXxX', '0987654321', 'Hanoi, Vietnam', 'Admin'),
+#     ('Nguyen Van A', 'a.nguyen@email.com', '$2a$10$N9qo8uLOickgx2ZMRZoMy.Mr/FMh2uY6XjMqGZqZgYzXxXxXxX', '0901234567', '123 Le Loi, Q1, HCM', 'Customer'),
+#     ('Tran Thi B', 'b.tran@email.com', '$2a$10$N9qo8uLOickgx2ZMRZoMy.Mr/FMh2uY6XjMqGZqZgYzXxXxXxX', '0909876543', '456 Nguyen Hue, Q1, HCM', 'Customer');
+--
+# insert into users (full_name, email, password, phone, address, role)
+# values
+#     ('Admin System', 'admin@gmail.com', '$2a$10$QXih24MRIa35Eo7NaYQrkOpe7q1ZFRK560/wymhWNjqHN5/9EE8LC', '0987654321', 'Hanoi, Vietnam', 'Admin');
+-- insert into products (name, brand, capacity, color, price, stock, description, category_id)
+-- values
+--     ('iPhone 15 Pro Max', 'Apple', '256GB', 'Titan Xám', 29990000.00, 15, 'Chip A17 Pro, màn hình 6.7 inch Super Retina XDR', 1),
+--     ('iPhone 15 Pro', 'Apple', '128GB', 'Titan Trắng', 25990000.00, 20, 'Chip A17 Pro, màn hình 6.1 inch', 1),
+--     ('Samsung Galaxy S24 Ultra', 'Samsung', '512GB', 'Titan Đen', 28490000.00, 10, 'S Pen tích hợp, camera 200MP', 2),
+--     ('Samsung Galaxy S24 Plus', 'Samsung', '256GB', 'Xanh', 22990000.00, 12, 'Màn hình 6.7 inch Dynamic AMOLED', 2),
+--     ('Xiaomi 14T Pro', 'Xiaomi', '512GB', 'Xanh', 14990000.00, 25, 'Camera Leica 50MP, pin 5000mAh', 3),
+--     ('Xiaomi Redmi Note 13', 'Xiaomi', '256GB', 'Đen', 6990000.00, 30, 'Màn hình AMOLED 120Hz', 3);
+--
+-- insert into coupons (code, discount_percent, valid_from, valid_to, max_usage, min_order_amount, is_active)
+-- values
+-- ('Welcome10', 10, curdate(), date_add(curdate(), interval 30 day), 100, 500000.00, true),
+-- ('Sale20', 20, curdate(), date_add(curdate(), interval 7 day), 50, 1000000.00, true),
+-- ('Flash50', 50, curdate(), date_add(curdate(), interval 1 day), 10, 2000000.00, true);
+--
+-- insert into flash_sales (product_id, flash_price, flash_quantity, start_time, end_time) values
+-- (1, 25990000.00, 5, now(), date_add(now(), interval 24 hour)),
+-- (3, 24990000.00, 3, now(), date_add(now(), interval 24 hour));
+--
+-- insert into orders (user_id, total_amount, status, shipping_address, shipping_phone) values
+--     (2, 29990000.00, 'Delivered', '123 Le Loi, Q1, HCM', '0901234567'),
+--     (2, 28490000.00, 'Shipping', '123 Le Loi, Q1, HCM', '0901234567'),
+--     (3, 6990000.00, 'Pending', '456 Nguyen Hue, Q1, HCM', '0909876543');
+--
+-- insert into order_details (order_id, product_id, quantity, price)
+-- values
+--     (1, 1, 1, 29990000.00),
+--     (2, 3, 1, 28490000.00),
+--     (3, 6, 1, 6990000.00);
+-- Đây là db của tôi tôi đã execute success : giờ hãy code 1. Màn hình khởi động & Xác thực, 1.1 Đăng nhập, 1.2 Đăng ký tài khoản: Nhớ là thiết kế giao diện bảng,... sao cho đẹp nhé có thể có màu hay gì đó nhưng mà phải phù hợp với từng trang và thành phần của trang đó....
