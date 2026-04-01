@@ -48,7 +48,7 @@ public class LoginView {
             }
 
             default -> {
-                Console.printError("Enter choice from 1 to 4 !");
+                Console.printError("Lua chon khong hop le !!");
                 return null;
             }
         }

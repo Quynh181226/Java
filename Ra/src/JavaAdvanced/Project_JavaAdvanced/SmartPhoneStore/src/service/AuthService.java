@@ -92,43 +92,6 @@ public class AuthService {
         return userDAO.update(user);
     }
 
-    public boolean changePassword(int userId, String oldPassword, String newPassword) throws SQLException {
-        User user = userDAO.findById(userId);
-        if (user == null) {
-            throw new IllegalArgumentException("Khong tim thay nguoi dung");
-        }
 
-        if (!BCrypt.checkPassword(oldPassword, user.getPassword())) {
-            throw new IllegalArgumentException("Mat khau cu khong dung");
-        }
 
-        if (!Validator.isStrongPassword(newPassword)) {
-            throw new IllegalArgumentException("Mat khau moi phai co it nhat 6 ky tu");
-        }
-
-        user.setPassword(BCrypt.hashPassword(newPassword));
-        return userDAO.update(user);
-    }
-
-    public boolean updateProfile(int userId, String fullName, String phone, String address) throws SQLException {
-        User user = userDAO.findById(userId);
-        if (user == null) {
-            throw new IllegalArgumentException("Khong tim thay nguoi dung");
-        }
-
-        if (fullName != null && !fullName.trim().isEmpty()) {
-            user.setFullName(fullName);
-        }
-        if (phone != null && !phone.trim().isEmpty()) {
-            if (!Validator.isValidPhone(phone)) {
-                throw new IllegalArgumentException("So dien thoai khong dung dinh dang");
-            }
-            user.setPhone(phone);
-        }
-        if (address != null && !address.trim().isEmpty()) {
-            user.setAddress(address);
-        }
-
-        return userDAO.update(user);
-    }
 }

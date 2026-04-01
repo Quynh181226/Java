@@ -166,3 +166,88 @@ alter table products add column is_deleted boolean default false;
 alter table products add index idx_is_deleted (is_deleted);
 
 alter table coupons add column applicable_type varchar(20) default 'ALL';
+
+-- Thêm sản phẩm cho category iPhone
+insert into products (name, brand, capacity, color, price, stock, description, category_id)
+values
+    ('iPhone 15', 'Apple', '128GB', 'Hồng', 18990000.00, 20, 'Chip A16, màn hình 6.1 inch', 1),
+    ('iPhone 15 Plus', 'Apple', '128GB', 'Xanh', 21990000.00, 18, 'Chip A16, màn hình 6.7 inch', 1),
+    ('iPhone 14 Pro Max', 'Apple', '256GB', 'Tím', 24990000.00, 10, 'Chip A16, camera 48MP', 1),
+    ('iPhone 14 Pro', 'Apple', '128GB', 'Vàng', 20990000.00, 12, 'Chip A16, màn hình 6.1 inch', 1),
+    ('iPhone 14', 'Apple', '128GB', 'Đỏ', 15990000.00, 25, 'Chip A15, camera kép', 1),
+    ('iPhone 13 Pro Max', 'Apple', '256GB', 'Xanh', 19990000.00, 8, 'Chip A15, pin trâu', 1),
+    ('iPhone 13', 'Apple', '128GB', 'Trắng', 12990000.00, 15, 'Chip A15, màn hình 6.1 inch', 1),
+    ('iPhone SE 2022', 'Apple', '64GB', 'Đen', 9990000.00, 30, 'Chip A15, Touch ID', 1);
+
+-- Thêm sản phẩm cho category Samsung
+insert into products (name, brand, capacity, color, price, stock, description, category_id)
+values
+    ('Samsung Galaxy S23 Ultra', 'Samsung', '256GB', 'Tím', 22990000.00, 12, 'S Pen tích hợp, camera 200MP', 2),
+    ('Samsung Galaxy S23 Plus', 'Samsung', '256GB', 'Xanh', 18990000.00, 15, 'Màn hình 6.6 inch', 2),
+    ('Samsung Galaxy S23', 'Samsung', '128GB', 'Xám', 15990000.00, 20, 'Màn hình 6.1 inch', 2),
+    ('Samsung Galaxy Z Fold5', 'Samsung', '512GB', 'Đen', 34990000.00, 5, 'Màn hình gập 7.6 inch', 2),
+    ('Samsung Galaxy Z Flip5', 'Samsung', '256GB', 'Xanh', 22990000.00, 8, 'Màn hình gập 3.4 inch', 2),
+    ('Samsung Galaxy A54', 'Samsung', '128GB', 'Tím', 8990000.00, 25, 'Màn hình 6.4 inch, pin 5000mAh', 2),
+    ('Samsung Galaxy A34', 'Samsung', '128GB', 'Xanh', 6990000.00, 30, 'Màn hình 6.6 inch, pin 5000mAh', 2),
+    ('Samsung Galaxy M54', 'Samsung', '128GB', 'Đen', 7990000.00, 20, 'Pin 6000mAh, camera 108MP', 2);
+
+-- Thêm sản phẩm cho category Xiaomi
+insert into products (name, brand, capacity, color, price, stock, description, category_id)
+values
+    ('Xiaomi 13T Pro', 'Xiaomi', '256GB', 'Xanh', 12990000.00, 15, 'Camera Leica 50MP, chip Dimensity', 3),
+    ('Xiaomi 13T', 'Xiaomi', '256GB', 'Đen', 10990000.00, 18, 'Camera Leica 50MP', 3),
+    ('Xiaomi 12T Pro', 'Xiaomi', '256GB', 'Xám', 11990000.00, 10, 'Camera 200MP, sạc 120W', 3),
+    ('Xiaomi Redmi Note 12', 'Xiaomi', '128GB', 'Xanh', 4990000.00, 35, 'Màn hình AMOLED, pin 5000mAh', 3),
+    ('Xiaomi Redmi Note 11', 'Xiaomi', '128GB', 'Xám', 3990000.00, 40, 'Màn hình 6.43 inch', 3),
+    ('Xiaomi Pad 6', 'Xiaomi', '128GB', 'Xám', 8990000.00, 12, 'Máy tính bảng 11 inch', 3),
+    ('Xiaomi 14', 'Xiaomi', '256GB', 'Trắng', 15990000.00, 8, 'Chip Snapdragon 8 Gen 3', 3);
+
+-- Thêm sản phẩm cho category OPPO
+insert into products (name, brand, capacity, color, price, stock, description, category_id)
+values
+    ('OPPO Find X6 Pro', 'OPPO', '256GB', 'Đen', 19990000.00, 10, 'Camera Hasselblad', 4),
+    ('OPPO Find N3', 'OPPO', '512GB', 'Vàng', 29990000.00, 5, 'Màn hình gập 7.8 inch', 4),
+    ('OPPO Reno10 Pro', 'OPPO', '256GB', 'Xanh', 11990000.00, 15, 'Camera tele 32MP', 4),
+    ('OPPO Reno10', 'OPPO', '128GB', 'Hồng', 8990000.00, 20, 'Màn hình AMOLED 120Hz', 4),
+    ('OPPO A78', 'OPPO', '128GB', 'Xanh', 5990000.00, 25, 'Pin 5000mAh, sạc 67W', 4),
+    ('OPPO A58', 'OPPO', '128GB', 'Đen', 4990000.00, 30, 'Màn hình 6.56 inch', 4);
+
+-- Thêm sản phẩm cho category Vivo
+insert into products (name, brand, capacity, color, price, stock, description, category_id)
+values
+    ('Vivo X100 Pro', 'Vivo', '256GB', 'Đen', 18990000.00, 8, 'Camera ZEISS 50MP', 5),
+    ('Vivo X100', 'Vivo', '256GB', 'Xanh', 15990000.00, 10, 'Camera ZEISS', 5),
+    ('Vivo V30 Pro', 'Vivo', '256GB', 'Hồng', 12990000.00, 12, 'Camera selfie 50MP', 5),
+    ('Vivo V30', 'Vivo', '128GB', 'Xanh', 9990000.00, 15, 'Màn hình 6.78 inch', 5),
+    ('Vivo Y100', 'Vivo', '128GB', 'Vàng', 6990000.00, 20, 'Pin 5000mAh', 5),
+    ('Vivo Y36', 'Vivo', '128GB', 'Đen', 5490000.00, 25, 'Màn hình 6.64 inch', 5);
+
+# -- Xem tất cả đơn hàng
+# SELECT id, user_id, total_amount, status, order_date
+# FROM orders
+# WHERE status = 'Delivered'
+# ORDER BY order_date DESC;
+#
+# -- Xem đơn hàng theo tháng
+# SELECT id, user_id, total_amount, status, order_date
+# FROM orders
+# WHERE status = 'Delivered'
+#   AND MONTH(order_date) = 4
+#   AND YEAR(order_date) = 2026;
+
+# INSERT INTO orders (user_id, total_amount, status, shipping_address, shipping_phone, order_date)
+# VALUES
+#     (2, 29990000.00, 'Delivered', '123 Le Loi, Q1, HCM', '0901234567', '2026-04-01 10:30:00'),
+#     (2, 28490000.00, 'Delivered', '123 Le Loi, Q1, HCM', '0901234567', '2026-04-05 14:20:00'),
+#     (3, 6990000.00, 'Delivered', '456 Nguyen Hue, Q1, HCM', '0909876543', '2026-04-10 09:15:00'),
+#     (2, 18990000.00, 'Delivered', '123 Le Loi, Q1, HCM', '0901234567', '2026-04-15 16:45:00'),
+#     (3, 15990000.00, 'Delivered', '456 Nguyen Hue, Q1, HCM', '0909876543', '2026-04-20 11:00:00');
+#
+# -- Thêm chi tiết đơn hàng
+# INSERT INTO order_details (order_id, product_id, quantity, price)
+# VALUES
+#     (4, 1, 1, 29990000.00),
+#     (5, 3, 1, 28490000.00),
+#     (6, 6, 1, 6990000.00),
+#     (7, 2, 1, 18990000.00),
+#     (8, 5, 1, 15990000.00);

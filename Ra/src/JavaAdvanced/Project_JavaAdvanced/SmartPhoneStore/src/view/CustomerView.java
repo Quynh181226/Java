@@ -46,15 +46,15 @@ public class CustomerView {
         while (true) {
             System.out.println("\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
             System.out.printf("|   Hello , %-28s |\n", customer.getFullName() + " !!");
-            System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━ SHOPPING ━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┓");
-            System.out.println("|                             |                        |                       |                       |");
-            System.out.println("|  1. XEM DANH SACH SAN PHAM  |  2. TIM KIEM SAN PHAM  |  3. QUAN LY GIO HANG  |  4. LICH SU DON HANG  |");
-            System.out.println("|                             |                        |                       |                       |");
-            System.out.println("|━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━┻━━━━━━━━━━━━━━━━━━━━━━━━┻━━┳━━━━━━━━━━━━━━━━━━━━┻━┳━━━━━━━━━━━━━━━━━━━━━|");
-            System.out.println("|                           |                             |                      |                     |");
-            System.out.println("|    5. THONG TIN CA NHAN   |    6. SU DUNG MA GIAM GIA   |    7. FLASH SALE     |     0. DANG XUAT    |");
-            System.out.println("|                           |                             |                      |                     |");
-            System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━┛");
+            System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━ SHOPPING ━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+            System.out.println("|                                  |                                 |                            |");
+            System.out.println("|     1. Xem Danh Sach San Pham    |      2. Tim Kiem San Pham       |     3. Quan Ly Gio Hang    |");
+            System.out.println("|                                  |                                 |                            |");
+            System.out.println("|━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━┻━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┻━━━━━━━━━━┳━━━━━━━━━━━━━━━━━|");
+            System.out.println("|                           |                          |                        |                 |");
+            System.out.println("|   4. Lich Su Don Hang     |  5. Su Dung Ma Giam Gia  |    6. Flash Sale       |     0. Logout   |");
+            System.out.println("|                           |                          |                        |                 |");
+            System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━┛");
 
             int choice = Console.inputInt("Lua chon cua ban: ");
 
@@ -64,9 +64,8 @@ public class CustomerView {
                     case 2 -> searchProducts();
                     case 3 -> manageCart();
                     case 4 -> viewOrderHistory();
-                    case 5 -> viewProfile();
-                    case 6 -> useCoupon();
-                    case 7 -> viewFlashSales();
+                    case 5 -> useCoupon();
+                    case 6 -> viewFlashSales();
                     case 0 -> {
                         Console.printSuccess("Dang xuat thanh cong !!");
                         return;
@@ -390,73 +389,6 @@ public class CustomerView {
             }
 
             System.out.println("└──────────────────────────────┴──────────────┴──────────────────────┴──────────────────────┘");
-        }
-    }
-
-    private void viewProfile() throws SQLException {
-        while (true) {
-            System.out.println("THONG TIN CA NHAN");
-
-            Console.printSeparator();
-            System.out.println("Ho ten: " + currentUser.getFullName());
-            System.out.println("Email: " + currentUser.getEmail());
-            System.out.println("So dien thoai: " + currentUser.getPhone());
-            System.out.println("Dia chi: " + currentUser.getAddress());
-            Console.printSeparator();
-
-            System.out.println("1. Chinh sua thong tin");
-            System.out.println("2. Doi mat khau");
-            System.out.println("0. Quay lai");
-
-            int choice = Console.inputInt("Lua chon: ");
-
-            if (choice == 0) {
-                break;
-            } else if (choice == 1) {
-                updateProfile();
-            } else if (choice == 2) {
-                changePassword();
-            }
-        }
-    }
-
-    private void updateProfile() throws SQLException {
-        System.out.println("- - - - Chỉnh sửa thông tin:");
-
-        String fullName = Console.inputString("Ho ten moi (bo trong neu khong doi): ");
-        String phone = Console.inputString("So dien thoai moi (bo trong neu khong doi): ");
-        String address = Console.inputString("Dia chi moi (bo trong neu khong doi): ");
-
-        if (fullName.isEmpty()) fullName = currentUser.getFullName();
-        if (phone.isEmpty()) phone = currentUser.getPhone();
-        if (address.isEmpty()) address = currentUser.getAddress();
-
-        if (authService.updateProfile(currentUser.getId(), fullName, phone, address)) {
-            currentUser.setFullName(fullName);
-            currentUser.setPhone(phone);
-            currentUser.setAddress(address);
-            Console.printSuccess("Cap nhat thong tin thanh cong");
-        } else {
-            Console.printError("Cap nhat that bai");
-        }
-    }
-
-    private void changePassword() throws SQLException {
-        System.out.println("DOI MAT KHAU");
-
-        String oldPassword = Console.inputString("Mat khau cu: ");
-        String newPassword = Console.inputString("Mat khau moi: ");
-        String confirmPassword = Console.inputString("Xac nhan mat khau moi: ");
-
-        if (!newPassword.equals(confirmPassword)) {
-            Console.printError("Mat khau xac nhan khong khop");
-            return;
-        }
-
-        if (authService.changePassword(currentUser.getId(), oldPassword, newPassword)) {
-            Console.printSuccess("Doi mat khau thanh cong");
-        } else {
-            Console.printError("Doi mat khau that bai");
         }
     }
 
