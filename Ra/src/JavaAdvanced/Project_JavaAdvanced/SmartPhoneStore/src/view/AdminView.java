@@ -167,7 +167,7 @@ public class AdminView {
         } else {
             System.out.println("\n┌─── Danh sach danh muc ────┐");
             System.out.println("┌──────┬──────────────────────────────┬────────────────────────────────────────────┐");
-             System.out.printf("│ %-4s │ %-28s │ %-42s │\n", "ID", "Ten Danh Muc", "Mo Ta");
+            System.out.printf("│ %-4s │ %-28s │ %-42s │\n", "ID", "Ten Danh Muc", "Mo Ta");
             System.out.println("├──────┼──────────────────────────────┼────────────────────────────────────────────┤");
             for (Category c : categories) {
                 System.out.printf("│ %-4s │ %-28s │ %-42s │\n", c.getId(), c.getName(), c.getDescription() != null ? c.getDescription() : "");
@@ -226,7 +226,10 @@ public class AdminView {
         double price = Console.inputDouble("Gia ban: ");
         int stock = Console.inputInt("So luong ton kho: ");
         String description = Console.inputString("Mo ta: ");
+        viewAllCategories();
         int categoryId = Console.inputInt("ID danh muc: ");
+
+
 
         if (productService.addProduct(name, brand, capacity, color, price, stock, description, categoryId)) {
             Console.printSuccess("Them san pham thanh cong !!");
@@ -518,7 +521,7 @@ public class AdminView {
         } else {
             System.out.println("\n┌─── Danh sach đon hang ────┐");
             System.out.println("┌──────┬────────────────────────┬───────────────────────┬──────────────────────┬──────────────────────┐");
-             System.out.printf("│ %-4s │ %-22s │ %-21s │ %-20s │ %-20s │\n", "ID", "Khach Hang", "Ngay Dat", "Tong Tien", "Trang Thai");
+            System.out.printf("│ %-4s │ %-22s │ %-21s │ %-20s │ %-20s │\n", "ID", "Khach Hang", "Ngay Dat", "Tong Tien", "Trang Thai");
             System.out.println("├──────┼────────────────────────┼───────────────────────┼──────────────────────┼──────────────────────┤");
             for (Order o : orders) {
                 System.out.printf("│ %-4s │ %-22s │ %-20s │ %-20s │ %-20s │\n", o.getId(), o.getUserFullName(), o.getOrderDate(), o.getTotalAmount() + " VND", getStatusText(o.getStatus()));
@@ -536,7 +539,7 @@ public class AdminView {
 
         if (orders.isEmpty()) {
             Console.printInfo("Khong co don hang nao voi trang thai: " + status.substring(0, 1).toUpperCase()
-                                                                        + status.substring(1).toLowerCase()
+                    + status.substring(1).toLowerCase()
             );
         } else {
             System.out.println("\n┌─── Xem đon hang theo trang thai ────┐");
@@ -696,7 +699,7 @@ public class AdminView {
 
         System.out.println("┌ Thong Ke Don Hang Theo Trang Thai ┐");
         System.out.println("┌──────────────────────┬────────────┐");
-         System.out.printf("│ %-20s │ %-10s │\n", "Trang Thai", "So Luong");
+        System.out.printf("│ %-20s │ %-10s │\n", "Trang Thai", "So Luong");
         System.out.println("├──────────────────────┼────────────┤");
         for (Map.Entry<String, Integer> entry : stats.entrySet()) {
             System.out.printf("│ %-20s │ %-10d │\n", getStatusText(entry.getKey()), entry.getValue());
