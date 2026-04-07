@@ -1,32 +1,20 @@
 package com.example.Ss2.Ex5.model;
 
+import java.util.Date;
 
-
-import java.time.LocalDate;
-
-/**
- * Employee Model (Ex05)
- * Dai dien cho mot nhan vien
- */
 public class Employee {
-    private String code;           // NV001, NV002, ...
-    private String fullName;
-    private String department;    // Ke toan, Ky thuat, ...
+    private String code, fullName, department, status;
     private double salary;
-    private LocalDate hireDate;
-    private String status;        // Dang lam, Nghi phep, Thu viec
+    private Date joinDate;
 
-    public Employee(String code, String fullName, String department,
-                    double salary, LocalDate hireDate, String status) {
+    public Employee(String code, String fullName, String department, double salary, Date joinDate, String status) {
         this.code = code;
         this.fullName = fullName;
         this.department = department;
         this.salary = salary;
-        this.hireDate = hireDate;
+        this.joinDate = joinDate;
         this.status = status;
     }
-
-    // ========== GETTERS ==========
 
     public String getCode() {
         return code;
@@ -44,23 +32,11 @@ public class Employee {
         return salary;
     }
 
-    public LocalDate getHireDate() {
-        return hireDate;
+    public Date getJoinDate() {
+        return joinDate;
     }
 
     public String getStatus() {
         return status;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "code='" + code + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", department='" + department + '\'' +
-                ", salary=" + salary +
-                ", hireDate=" + hireDate +
-                ", status='" + status + '\'' +
-                '}';
     }
 }

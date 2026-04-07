@@ -27,7 +27,7 @@
 </head>
 <body>
 <div class="nav">
-    <a href="${pageContext.request.contextPath}/ss2/students">Danh sách SV</a>
+    <a href="${pageContext.request.contextPath}/ss2/employees">Danh sách SV</a>
     <a href="${pageContext.request.contextPath}/ss2/dashboard">Dashboard</a>
 </div>
 

@@ -29,7 +29,7 @@
 </head>
 <body>
 <div class="nav">
-  <a href="${pageContext.request.contextPath}/ss2/students">Danh sách SV</a>
+  <a href="${pageContext.request.contextPath}/ss2/employees">Danh sách SV</a>
   <a href="${pageContext.request.contextPath}/ss2/dashboard">Dashboard</a>
   <a href="${pageContext.request.contextPath}/index.jsp">Trang chủ</a>
 </div>
@@ -45,7 +45,7 @@
   <a href="?faculty=Công nghệ thông tin">CNTT</a>
   <a href="?faculty=Khoa học máy tính">KHMT</a>
   <a href="?faculty=Hệ thống thông tin">HTTT</a>
-  <a href="${pageContext.request.contextPath}/ss2/students">Xóa lọc</a>
+  <a href="${pageContext.request.contextPath}/ss2/employees">Xóa lọc</a>
 
   <strong style="margin-left: 20px;">Tìm kiếm:</strong>
   <form method="get" style="display: inline;">
@@ -72,18 +72,18 @@
   </tr>
   </thead>
   <tbody>
-  <c:forEach var="student" items="${students}" varStatus="status">
+  <c:forEach var="employee" items="${employees}" varStatus="status">
     <tr class="${status.index % 2 == 0 ? 'even' : 'odd'}">
       <td>${status.index + 1}</td>
-      <td>${student.studentCode}</td>
-      <td>${student.fullName}</td>
-      <td>${student.faculty}</td>
-      <td>${student.enrollmentYear}</td>
-      <td>${student.gpa}</td>
-      <td class="status-${student.status == 'Đang học' ? 'green' : (student.status == 'Bảo lưu' ? 'orange' : 'blue')}">
-          ${student.status}
+      <td>${employee.studentCode}</td>
+      <td>${employee.fullName}</td>
+      <td>${employee.faculty}</td>
+      <td>${employee.enrollmentYear}</td>
+      <td>${employee.gpa}</td>
+      <td class="status-${employee.status == 'Đang học' ? 'green' : (employee.status == 'Bảo lưu' ? 'orange' : 'blue')}">
+          ${employee.status}
       </td>
-      <td><a href="${pageContext.request.contextPath}/ss2/students/detail?id=${student.id}">Xem</a></td>
+      <td><a href="${pageContext.request.contextPath}/ss2/employees/detail?id=${employee.id}">Xem</a></td>
     </tr>
   </c:forEach>
   </tbody>

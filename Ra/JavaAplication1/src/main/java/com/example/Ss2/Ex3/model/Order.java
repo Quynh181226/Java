@@ -1,53 +1,33 @@
 package com.example.Ss2.Ex3.model;
 
-
-
 import java.util.Date;
 
-/**
- * Order Model (Ex03)
- * Đại diện cho một đơn hàng
- */
 public class Order {
-    private String orderCode;
+    private String id;
     private String productName;
-    private double totalAmount;
+    private double amount;
     private Date orderDate;
 
-    public Order(String orderCode, String productName, double totalAmount, Date orderDate) {
-        this.orderCode = orderCode;
+    public Order(String id, String productName, double amount, Date orderDate) {
+        this.id = id;
         this.productName = productName;
-        this.totalAmount = totalAmount;
+        this.amount = amount;
         this.orderDate = orderDate;
     }
 
-    // ========== GETTERS ==========
-
-    public String getOrderCode() {
-        return orderCode;
+    public String getId() {
+        return id;
     }
 
     public String getProductName() {
         return productName;
     }
 
-    public double getTotalAmount() {
-        return totalAmount;
+    public double getAmount() {
+        return amount;
     }
 
     public Date getOrderDate() {
         return orderDate;
-    }
-
-    // ========== TOSTRING ==========
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderCode='" + orderCode + '\'' +
-                ", productName='" + productName + '\'' +
-                ", totalAmount=" + totalAmount +
-                ", orderDate=" + orderDate +
-                '}';
     }
 }

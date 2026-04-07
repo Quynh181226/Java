@@ -25,7 +25,7 @@
 </head>
 <body>
 <div class="nav">
-  <a href="${pageContext.request.contextPath}/ss2/students">Danh sách SV</a>
+  <a href="${pageContext.request.contextPath}/ss2/employees">Danh sách SV</a>
   <a href="${pageContext.request.contextPath}/ss2/dashboard">Dashboard</a>
 </div>
 
@@ -34,34 +34,34 @@
 <div class="detail-card">
   <div class="detail-row">
     <span class="label">Mã sinh viên:</span>
-    <span class="value">${student.studentCode}</span>
+    <span class="value">${employee.studentCode}</span>
   </div>
   <div class="detail-row">
     <span class="label">Họ tên:</span>
-    <span class="value">${student.fullName}</span>
+    <span class="value">${employee.fullName}</span>
   </div>
   <div class="detail-row">
     <span class="label">Khoa:</span>
-    <span class="value">${student.faculty}</span>
+    <span class="value">${employee.faculty}</span>
   </div>
   <div class="detail-row">
     <span class="label">Năm nhập học:</span>
-    <span class="value">${student.enrollmentYear}</span>
+    <span class="value">${employee.enrollmentYear}</span>
   </div>
   <div class="detail-row">
     <span class="label">GPA:</span>
-    <span class="value">${student.gpa}</span>
+    <span class="value">${employee.gpa}</span>
   </div>
   <div class="detail-row">
     <span class="label">Trạng thái:</span>
-    <span class="value" style="color: ${student.status == 'Đang học' ? 'green' : (student.status == 'Bảo lưu' ? 'orange' : 'blue')};">
-      ${student.status}
+    <span class="value" style="color: ${employee.status == 'Đang học' ? 'green' : (employee.status == 'Bảo lưu' ? 'orange' : 'blue')};">
+      ${employee.status}
     </span>
   </div>
 </div>
 
 <div class="back-btn">
-  <a href="${pageContext.request.contextPath}/ss2/students">Quay lại danh sách</a>
+  <a href="${pageContext.request.contextPath}/ss2/employees">Quay lại danh sách</a>
 </div>
 </body>
 </html>

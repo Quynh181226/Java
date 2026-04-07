@@ -5,11 +5,10 @@
          https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
 
-    <display-name>StudentHub - Ss2</display-name>
+    <display-name>StudentHub</display-name>
 
-    <!-- Cấu hình DispatcherServlet cho Ss2 -->
     <servlet>
-        <servlet-name>dispatcherSs2</servlet-name>
+        <servlet-name>dispatcher</servlet-name>  <!-- ĐỔI TÊN THÀNH dispatcher -->
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextClass</param-name>
@@ -23,11 +22,8 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>dispatcherSs2</servlet-name>
-        <url-pattern>/ss2/*</url-pattern>  <!-- Thêm prefix /ss2/ để phân biệt với Ss1, Ss3 -->
+        <servlet-name>dispatcher</servlet-name>  <!-- ĐỔI TÊN THÀNH dispatcher -->
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
 </web-app>
