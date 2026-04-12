@@ -4,10 +4,10 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/Ra/JavaAplication2" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Ra/JavaApplication" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/Ra/JavaAplication2" />
+            <option value="$PROJECT_DIR$/Ra/JavaApplication" />
           </set>
         </option>
       </GradleProjectSettings>

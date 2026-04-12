@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/main-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    table {
+        border-radius: 10px;
+        overflow: hidden;
+        background: white;
+    }
+
+    .table thead {
+        background: #343a40;
+        color: white;
+    }
+
+    .table tbody tr:hover {
+        background: #f1f3f5;
+        transition: 0.2s;
+    }
+
+    .badge{
+        padding: 5px 10px;
+        font-size: 12px;
+        border-radius: 12px;
+    }
+</style>
+<body>
+<div layout:fragment="content">
+
+    <h3 class="text-center mb-4">Danh sách khóa học</h3>
+
+    <div th:if="${error}" class="alert alert-danger">
+        <span th:text="${error}"></span>
+    </div>
+
+    <div th:if="${success}" class="alert alert-success">
+        <span th:text="${success}"></span>
+    </div>
+
+    <div class="card p-3 mb-4 shadow-sm">
+        <form th:action="@{/course/list}" method="get" class="form-inline">
+
+            <select name="level" class="form-control mr-2">
+                <option value="ALL" th:selected="${level == 'ALL'}">All</option>
+                <option value="Beginner" th:selected="${level == 'Beginner'}">Beginner</option>
+                <option value="Intermediate" th:selected="${level == 'Intermediate'}">Intermediate</option>
+                <option value="Advanced" th:selected="${level == 'Advanced'}">Advanced</option>
+            </select>
+
+            <input type="text"
+                   name="fee"
+                   th:value="${fee > 0 ? fee : ''}"
+                   placeholder="Nhập học phí tối đa"
+                   class="form-control mr-2">
+            <button class="btn btn-primary">Tìm kiếm</button>
+        </form>
+    </div>
+
+    <div th:if="${#lists.isEmpty(courses)}" class="alert alert-warning">
+        Hiện chưa có lớp học phù hợp với trình độ này
+    </div>
+
+    <!-- TABLE -->
+    <table class="table table-hover table-striped"
+           th:if="${!#lists.isEmpty(courses)}">
+
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Cấp độ</th>
+            <th>Học phí</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="c : ${courses}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.name}"></td>
+
+            <td>
+                <span class="badge badge-success" th:if="${c.level == 'Beginner'}">Beginner</span>
+                <span class="badge badge-warning" th:if="${c.level == 'Intermediate'}">Intermediate</span>
+                <span class="badge badge-danger" th:if="${c.level == 'Advanced'}">Advanced</span>
+            </td>
+
+            <td th:text="${#numbers.formatDecimal(c.fee,0,'COMMA',0,'POINT')} + ' VNĐ'"></td>
+
+            <td>
+                <span class="badge badge-success" th:if="${c.studentCount == 0}">
+                    Chưa có học viên
+                </span>
+                <span class="badge badge-danger" th:if="${c.studentCount > 0}">
+                    Đã có [[${c.studentCount}]] HV
+                </span>
+            </td>
+
+            <td>
+                <a th:href="@{'/course/detail/' + ${c.id}}"
+                   class="btn btn-sm btn-outline-info">Chi tiết</a>
+
+                <a th:href="@{'/course/edit/' + ${c.id}}"
+                   class="btn btn-sm btn-outline-warning">Sửa</a>
+
+                <form th:action="@{'/course/delete/' + ${c.id}}"
+                      method="post"
+                      style="display:inline"
+                      onsubmit="return confirm('Bạn có chắc muốn xoá không?');">
+
+                    <button class="btn btn-sm btn-outline-danger">
+                        Xóa
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

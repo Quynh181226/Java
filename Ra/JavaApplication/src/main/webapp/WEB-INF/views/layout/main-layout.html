@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>EduPath</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<style>
+    header {
+        background: linear-gradient(135deg, #343a40, #212529);
+    }
+
+    .navbar .nav-link {
+        font-weight: 500;
+        margin-right: 15px;
+    }
+
+    .navbar .nav-link:hover {
+        color: #007bff !important;
+    }
+</style>
+<body>
+
+<header class="p-4 text-white" style="background: linear-gradient(135deg,#343a40,#212529);">
+    <div class="container text-center">
+        <h3 class="mb-1">EduPath</h3>
+        <small class="text-light">Learn English, Lead Your Future</small>
+    </div>
+</header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container d-flex justify-content-between">
+
+        <div class="navbar-nav">
+            <a class="nav-link"
+               th:href="@{/course/list}">
+                Danh sách khóa học
+            </a>
+        </div>
+
+        <div class="navbar-nav">
+            <a class="nav-link font-weight-bold text-primary"
+               href="#">
+                Đăng ký tư vấn
+            </a>
+        </div>
+    </div>
+</nav>
+<div class="container mt-4" layout:fragment="content">
+
+</div>
+</body>
+</html>
